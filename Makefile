@@ -1,20 +1,22 @@
 NAME = fdf
+
+SRC = main.c create_win.c read_file.c
 CFLAGS = -Wall -Werror -Wextra
 MLX = -lmlx -framework OpenGL -framework AppKit
 LIBDIR = libft/
-SRCDIR = srcs/
-FILES = main.c create_win.c
-
-SRC = $(addprefix $(SRCDIR), $(FILES))
+LIB = libft.a
+LIBPATH = $(addprefix $(LIBDIR), $(LIB))
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
+.PHONY: all clean fclean re
+
 $(NAME):
 	@make -C $(LIBDIR)
-	@gcc $(CFLAGS) $(SRC) -L $(LIBDIR) $(MLX) -o $(NAME)
-	@echo "$(NAME) created"
-
+	@gcc $(CFLAGS) -c $(SRC)
+	@gcc -o $@ $(OBJ) $(LIBPATH) $(MLX)
+	@echo "$@ created"
 
 clean:
 	@make clean -C $(LIBDIR)
