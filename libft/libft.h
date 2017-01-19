@@ -88,6 +88,10 @@ int					ft_islower(int c);
 void				ft_swap(int *a, int *b);
 int					ft_max(int *tab, unsigned int len);
 
+char				*ft_strdup_to_c(char *str, char c);
+size_t				ft_strlen_to_c(char *str, char c);
+int					ft_count_word(const char *s, char c);
+
 typedef struct		s_gnl
 {
 	int				fd;

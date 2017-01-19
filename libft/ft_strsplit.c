@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int		ft_count_word(const char *s, char c)
+static int		ft_count_w(const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -61,7 +61,7 @@ char			**ft_strsplit(const char *s, char c)
 
 	if (!s || !c)
 		return (NULL);
-	nb_word = ft_count_word(s, c);
+	nb_word = ft_count_w(s, c);
 	tab = (char**)malloc(sizeof(tab) * (nb_word + 1));
 	if (!tab)
 		return (NULL);
