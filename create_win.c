@@ -13,13 +13,13 @@ static int		key_hook(int keycode)
 	return (0);
 }
 
-void			ft_create_win(void)
+void			ft_create_win(t_env *e)
 {
-	t_env	e;
-
-	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, WIN_X, WIN_Y, "fdf");
-	mlx_key_hook(e.win, key_hook, &e);
-	mlx_mouse_hook(e.win, mouse_hook, &e);
-	mlx_loop(e.mlx);
+	e->win_x = 400;
+	e->win_y = 400;
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
+	mlx_key_hook(e->win, key_hook, &e);
+	mlx_mouse_hook(e->win, mouse_hook, &e);
+	mlx_loop(e->mlx);
 }

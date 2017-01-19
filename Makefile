@@ -1,6 +1,6 @@
 NAME = fdf
 
-SRC = main.c create_win.c read_file.c
+SRC = main.c create_fdf.c create_win.c read_file.c map.c
 CFLAGS = -Wall -Werror -Wextra
 MLX = -lmlx -framework OpenGL -framework AppKit
 LIBDIR = libft/

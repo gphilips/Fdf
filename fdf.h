@@ -14,14 +14,27 @@
 
 typedef struct	s_env
 {
-	void	*mlx;
-	void	*win;
-	int		file_x;
-	int		file_y;
-	int		x;
-	int		y;
+	void		*mlx;
+	void		*win;
+	int			win_x;
+	int			win_y;
 }				t_env;
+/*
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+*/
+typedef struct	s_file
+{
+	int			**map;
+	int			file_x;
+	int			file_y;
+}				t_file;
 
-void	ft_create_win(void);
-void	ft_read_file(char *file);
+int		ft_create_fdf(char *file);
+void	ft_read_file(int fd, t_file *file);
+int		**ft_create_map(t_list *start, t_file *map);
+void	ft_create_win(t_env *e);
 #endif
