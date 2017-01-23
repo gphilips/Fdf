@@ -3,6 +3,7 @@
 int		**ft_create_int_tab(t_list *lst, t_env *e)
 {
 	int		**tab;
+	char	**split;	
 	int		x;
 	int		y;
 	
@@ -10,19 +11,19 @@ int		**ft_create_int_tab(t_list *lst, t_env *e)
 	y = -1;
 	while (++y < e->file.y)
 	{
-		e->file.tabsplit = ft_strsplit((char*)lst->content, ' ');
+		split = ft_strsplit((char*)lst->content, ' ');
 		tab[y] = (int*)ft_memalloc(sizeof(int) * e->file.x);
 		x = -1;
 		while (++x < e->file.x)
 		{
-//			printf("tabsplit: %s\n", e->file.tabsplit[x]);
-//			printf("tabsplit atoi: %d\n", ft_atoi(e->file.tabsplit[x]));
-			tab[y][x] = ft_atoi(e->file.tabsplit[x]);
+			free(split[x]);
+//			printf("split: %s\n", split[x]);
+//			printf("split atoi: %d\n", ft_atoi(split[x]));
+			tab[y][x] = ft_atoi(split[x]);
 //			printf("%d\n", tab[0][0]);
-			free(e->file.tabsplit[x]);
 		}
 		lst = lst->next;
 	}
-	free(e->file.tabsplit);
+	free(split);
 	return (tab);
 }

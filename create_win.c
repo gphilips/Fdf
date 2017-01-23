@@ -15,8 +15,6 @@ static int		key_hook(int keycode)
 
 void			ft_create_win(t_env *e)
 {
-	e->win_x = 400;
-	e->win_y = 400;
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
 	mlx_key_hook(e->win, key_hook, &e);

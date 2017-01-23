@@ -11,16 +11,14 @@ static void	ft_lst_push_back(t_list **list, char *line)
 static int	ft_get_size(t_env *e)
 {
 	int		i;
-	char	**tabsplit;
 	t_list	*tmp;
 
 	i = 0;
-	e->file.x = 0;
 	tmp = e->lst;
 	while (tmp)
 	{
-		tabsplit = ft_strsplit(tmp->content, ' ');
-		while (tabsplit[i])
+		e->file.split = ft_strsplit(tmp->content, ' ');
+		while (e->file.split[i])
 			i++;
 		if (e->file.x == 0)
 			e->file.x = i;
@@ -56,12 +54,9 @@ static void		ft_print_tab(t_env *e)
 	{
 		x = -1;
 		while (++x < e->file.x)
-			printf("%d\n", e->file.map[y][x]);
+			printf("%d  ", e->file.map[y][x]);
+		printf("\n");
 	}
-/*	printf("-----TABSPLIT----\n");
-	i = 0;
-	while (tabsplit[i++])
-		printf("%s\n", tabsplit[i]);*/
 }
 
 void	ft_read_file(int fd, t_env *e)
@@ -71,8 +66,6 @@ void	ft_read_file(int fd, t_env *e)
 	
 	e->lst = NULL;
 	line = NULL;
-	e->file.map = NULL;
-	e->file.y = 0;
 	get_next_line(fd, &line);
 	e->lst = ft_lstnew(line, ft_strlen(line) + 1);
 	start = e->lst;
