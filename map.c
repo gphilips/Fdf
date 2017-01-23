@@ -1,29 +1,28 @@
 #include "fdf.h"
 
-int		**ft_create_map(t_list *start, t_file *file)
+int		**ft_create_int_tab(t_list *lst, t_env *e)
 {
-	char	*line;
-	char	**tmp;
+	int		**tab;
 	int		x;
 	int		y;
-
-	if (!(file->map = (int**)malloc(sizeof(int*) * file->file_y)))
-		return (NULL);
-	line = start->content;
-	y = 0;
-	while (y < file->file_y)
+	
+	tab = (int**)ft_memalloc(sizeof(int*) * e->file.y);
+	y = -1;
+	while (++y < e->file.y)
 	{
-		if (!(file->map[y] = (int*)malloc(sizeof(int) * file->file_x)))
-		return(NULL);
-		tmp = ft_strsplit(line, ' ');
-		x = 0;
-		while (x < file->file_x)
+		e->file.tabsplit = ft_strsplit((char*)lst->content, ' ');
+		tab[y] = (int*)ft_memalloc(sizeof(int) * e->file.x);
+		x = -1;
+		while (++x < e->file.x)
 		{
-			file->map[y][x] = ft_atoi(tmp[x]);
-			x++;
+//			printf("tabsplit: %s\n", e->file.tabsplit[x]);
+//			printf("tabsplit atoi: %d\n", ft_atoi(e->file.tabsplit[x]));
+			tab[y][x] = ft_atoi(e->file.tabsplit[x]);
+//			printf("%d\n", tab[0][0]);
+			free(e->file.tabsplit[x]);
 		}
-		y++;
-		start = start->next;
+		lst = lst->next;
 	}
-	return (file->map);
+	free(e->file.tabsplit);
+	return (tab);
 }

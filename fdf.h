@@ -6,11 +6,40 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <mlx.h>
+# include <math.h>
 
 # include <stdio.h>
+/*
+typedef struct	s_color
+{
+	int			color;
+	int			red;
+	int			green;
+	int			blue;
+}				t_color;
+*/
 
-# define WIN_X 400
-# define WIN_Y 400
+typedef struct	s_file
+{
+	int			**map;
+	char		**tabsplit;
+	int			x;
+	int			y;
+}				t_file;
+
+typedef struct	s_point
+{
+	int			x1;
+	int			y1;
+	int			x2;
+	int			y2;
+	int			dx;
+	int			dy;
+	int			sx;
+	int			sy;
+	int			err1;
+	int			err2;
+}				t_point;
 
 typedef struct	s_env
 {
@@ -18,23 +47,14 @@ typedef struct	s_env
 	void		*win;
 	int			win_x;
 	int			win_y;
+	t_file		file;
+	t_list		*lst;
+	t_point		point;
+//	t_color		color;
 }				t_env;
-/*
-typedef struct	s_point
-{
-	int			x;
-	int			y;
-}				t_point;
-*/
-typedef struct	s_file
-{
-	int			**map;
-	int			file_x;
-	int			file_y;
-}				t_file;
 
 int		ft_create_fdf(char *file);
-void	ft_read_file(int fd, t_file *file);
-int		**ft_create_map(t_list *start, t_file *map);
+void	ft_read_file(int fd, t_env *e);
+int		**ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_create_win(t_env *e);
 #endif

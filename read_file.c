@@ -8,49 +8,83 @@ static void	ft_lst_push_back(t_list **list, char *line)
 		*list = ft_lstnew(line, ft_strlen(line) + 1);
 }
 
-void	ft_read_file(int fd, t_file *file)
+static int	ft_get_size(t_env *e)
 {
-	char	*line;
-	t_list	*lst;
-	t_list	*start;
-	
-	lst = NULL;
-	file->file_x = 0;
-	file->file_y = 0;
-	get_next_line(fd, &line);
-	lst = ft_lstnew(line, ft_strlen(line));
-	free(line);
-	file->file_y++;
-	start = lst;
-	while (get_next_line(fd, &line))
+	int		i;
+	char	**tabsplit;
+	t_list	*tmp;
+
+	i = 0;
+	e->file.x = 0;
+	tmp = e->lst;
+	while (tmp)
 	{
-		ft_lst_push_back(&start, line);
-		file->file_x = ft_count_word(line, ' ');
-		file->file_y++;
-		free(line);
+		tabsplit = ft_strsplit(tmp->content, ' ');
+		while (tabsplit[i])
+			i++;
+		if (e->file.x == 0)
+			e->file.x = i;
+		if (e->file.x != i)
+			return (-1);
+		tmp = tmp->next;
 	}
-	file->map = ft_create_map(start, file);
-	
+	return (0);
+}
+
+/* Affichage du contenu de list et de la map */
+
+static void		ft_print_tab(t_env *e)
+{
 	printf("-----LIST----\n");	
 	t_list	*temp;
 	int	i = 0;
 	
-	temp = lst;
+	temp = e->lst;
 	while (temp)
 	{
 		printf("Maillon %d:\n", ++i);
 		printf("%s\n", temp->content);
 		temp = temp->next;
 	}
-	printf("Nb de col: %d\n", file->file_x);
-	printf("Nb de ligne: %d\n", file->file_y);
-	printf("\n-----MAP----\n");
-//	i = 0;
-//	int j = 0;
-	printf("%d", file->map[1][2]);
-/*	while (*file->map[j++])
+	printf("Nb de col: %d\n", e->file.x);
+	printf("Nb de ligne: %d\n", e->file.y);
+	
+	printf("-----MAP----\n");
+	int y = -1;
+	int x;
+	while (++y < e->file.y)
 	{
-		while (file->map[j][i++])
-			printf("%d", *file->map[j]);
-	}*/
+		x = -1;
+		while (++x < e->file.x)
+			printf("%d\n", e->file.map[y][x]);
+	}
+/*	printf("-----TABSPLIT----\n");
+	i = 0;
+	while (tabsplit[i++])
+		printf("%s\n", tabsplit[i]);*/
+}
+
+void	ft_read_file(int fd, t_env *e)
+{
+	char	*line;
+	t_list	*start;
+	
+	e->lst = NULL;
+	line = NULL;
+	e->file.map = NULL;
+	e->file.y = 0;
+	get_next_line(fd, &line);
+	e->lst = ft_lstnew(line, ft_strlen(line) + 1);
+	start = e->lst;
+	free(line);
+	e->file.y++;
+	ft_get_size(e);
+	while (get_next_line(fd, &line))
+	{
+		ft_lst_push_back(&e->lst, line);
+		e->file.y++;
+		free(line);
+	}
+	e->file.map = ft_create_int_tab(e->lst, e);
+	ft_print_tab(e);
 }
