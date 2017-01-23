@@ -2,18 +2,22 @@
 
 int		ft_count_word(const char *s, char c)
 {
-		int	i;
-		int	count;
+	int	i;
+	int	count;
+	int is_word;
 
-		i = 0;
-		count = 0;
-		if (s[0] != '\0')
-				count++;
-		while (s[i])
+	i = 0;
+	count = 0;
+	is_word = 0;
+	while (s[i++])
+	{
+		if (is_word == 1 && s[i] == c)
+			is_word = 0;
+		if (is_word == 1 && s[i] != c)
 		{
-				if (s[i] == c && s[i + 1] != c)
-						count++;
-				i++;
+			is_word = 1;
+			count++;
 		}
-		return (count);
+	}
+	return (count);
 }
