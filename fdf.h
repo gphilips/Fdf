@@ -22,7 +22,7 @@ typedef struct	s_color
 typedef struct	s_file
 {
 	int			**map;
-	char		**tabsplit;
+	char		**split;
 	int			x;
 	int			y;
 }				t_file;
@@ -53,7 +53,7 @@ typedef struct	s_env
 //	t_color		color;
 }				t_env;
 
-int		ft_create_fdf(char *file);
+t_env	*ft_init_all(t_env *e);
 void	ft_read_file(int fd, t_env *e);
 int		**ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_create_win(t_env *e);
