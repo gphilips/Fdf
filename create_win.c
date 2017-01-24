@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_win.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
+/*   Updated: 2017/01/24 17:33:34 by gphilips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int		mouse_hook(int button, int x, int y)
@@ -17,6 +29,7 @@ void			ft_create_win(t_env *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
+	ft_draw_point(e);
 	mlx_key_hook(e->win, key_hook, &e);
 	mlx_mouse_hook(e->win, mouse_hook, &e);
 	mlx_loop(e->mlx);
