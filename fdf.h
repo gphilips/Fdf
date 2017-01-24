@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
+/*   Updated: 2017/01/24 17:30:24 by gphilips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef	FDF_H
 # define FDF_H
 
@@ -54,7 +66,9 @@ typedef struct	s_env
 }				t_env;
 
 t_env	*ft_init_all(t_env *e);
-void	ft_read_file(int fd, t_env *e);
+int		ft_read_file(int fd, t_env *e);
 int		**ft_create_int_tab(t_list *lst, t_env *e);
+void	ft_draw_point(t_env *e);
 void	ft_create_win(t_env *e);
+int		ft_error(int n);
 #endif
