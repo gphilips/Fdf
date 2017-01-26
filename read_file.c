@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:51 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/24 17:04:41 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:33:14 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ static int	ft_get_size(t_env *e)
 		i = 0;
 		while (split[i])
 			i++;
-		if (e->file.x == 0 && flag == 0)
+		if (e->file.nb_x == 0 && flag == 0)
 		{
 			flag = 1;
-			e->file.x = i;
+			e->file.nb_x = i;
 		}
 		tmp_x = i;
-		if (e->file.x != tmp_x)
+		if (e->file.nb_x != tmp_x)
 			return (-1);
 		tmp = tmp->next;
 	}
 	return (0);
 }
 
-static void	ft_print_tab(t_env *e)
+void	ft_print_tab(t_env *e)
 {
-	printf("-----LIST----\n");
+	printf("----- LIST ----\n");
 	t_list	*temp;
 	int	i;
 
@@ -63,18 +63,18 @@ static void	ft_print_tab(t_env *e)
 		printf("%s\n", temp->content);
 		temp = temp->next;
 	}
-	printf("Nb de col: %d\n", e->file.x);
-	printf("Nb de ligne: %d\n", e->file.y);
+	printf("Nb de col: %d\n", e->file.nb_x);
+	printf("Nb de ligne: %d\n", e->file.nb_y);
 
-	printf("-----MAP----\n");
+	printf("----- MAP ----\n");
 	int y;
 	int x;
 
 	y= -1;
-	while (++y < e->file.y)
+	while (++y < e->file.nb_y)
 	{
 		x = -1;
-		while (++x < e->file.x)
+		while (++x < e->file.nb_x)
 			printf("%d  ", e->file.map[y][x]);
 		printf("\n");
 	}
@@ -93,16 +93,12 @@ int		ft_read_file(int fd, t_env *e)
 	e->lst = ft_lstnew(line, ft_strlen(line) + 1);
 	start = e->lst;
 	free(line);
-	e->file.y++;
+	e->file.nb_y++;
 	while (get_next_line(fd, &line))
 	{
 		ft_lst_push_back(&e->lst, line);
-		e->file.y++;
+		e->file.nb_y++;
 		free(line);
 	}
-	if (ft_get_size(e) == -1)
-		return (-1);
-	e->file.map = ft_create_int_tab(e->lst, e);
-	ft_print_tab(e);
-	return (0);
+	return ((ft_get_size(e) == -1 ? -1 : 0));
 }
