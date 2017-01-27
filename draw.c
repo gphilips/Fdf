@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/26 18:38:59 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/01/27 17:59:42 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,43 +35,48 @@ void	ft_draw_line(t_env *e)
 		}
 	}
 }
-/*
-static void			ft_center_map(t_env *e)
-{
-	e->map_x = (e->win_x - e->file.nb_x * e->file.w_space) / 2;
-	e->map_y = (e->win_y - e->file.nb_x * e->file.nb_y) / 2;
-}*/
-/*
-static int		ft_iso(int x, int y, int flag)
-{
-	int n;
 
-	n = 0;
-	if (flag == 0)
-		n =	(x - y) * (e->file.w_space / 2);
-	if (flag == 1)
-	return (n);
+static void		ft_iso(int x, int y, t_env *e)
+{
+	e->point.x1 = e->margin_x + (x - y) * (e->file.w_space / 2);
+	e->point.y1 = e->margin_y + (x + y) * (e->file.h_space / 2);
 }
-*/
+
 void	ft_draw_point(t_env *e)
 {
 	int		y;
 	int		x;
 
 	y = -1;
-//	ft_center_map(e);
 	while (++y < e->file.nb_y)
 	{
 		x = -1;
 		while (++x < e->file.nb_x)
 		{
+			ft_iso(x, y, e);
 			if (e->file.map[y][x] == 0)
-				mlx_pixel_put(e->mlx, e->win, 250 + (x - y) * (e->file.w_space / 2), 150 + (x + y) * (e->file.h_space / 2), 0x00FFFFFF);
+				mlx_pixel_put(e->mlx, e->win, e->point.x1, e->point.y1, 0x00FFFFFF);
 //				mlx_pixel_put(e->mlx, e->win, e->map_x + x * e->file.w_space, e->map_y + y * e->file.h_space, 0x00FFFFFF);
 			else
-				mlx_pixel_put(e->mlx, e->win, 250 + (x - y) * (e->file.w_space / 2), 150 + (x + y) * (e->file.h_space / 2), 0x0000FFFF);
+				mlx_pixel_put(e->mlx, e->win, e->point.x1, e->point.y1, 0x0000FFFF);
 //				mlx_pixel_put(e->mlx, e->win, e->map_x + x * e->file.w_space, e->map_y + y * e->file.h_space, 0x0000FFFF);
 		}
-		ft_draw_line(e);
 	}
 }
+/*
+void	ft_draw_grid(t_env *e)
+{
+	int		y;
+	int		x;
+
+	y = -1;
+	while (++y < e->file.nb_y)
+	{
+		x = -1;
+		while (++x < e->file.nb_x)
+		{
+			ft_iso(x, y, e);
+			ft_draw_line(e);
+		}
+	}
+}*/

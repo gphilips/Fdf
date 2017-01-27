@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/26 18:02:55 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:17:42 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,20 @@ typedef struct	s_color
 }				t_color;
 */
 
+typedef struct	s_map
+{
+	int		x;
+	int		y;
+	int		z;
+}				t_map;
+
 typedef struct	s_file
 {
-	int			**map;
+	t_map		**map;
 	int			nb_x;
 	int			nb_y;
 	int			w_space;
 	int			h_space;
-	int			z;
 }				t_file;
 
 typedef struct	s_point
@@ -61,8 +67,8 @@ typedef struct	s_env
 	void		*win;
 	int			win_x;
 	int			win_y;
-	int			map_x;
-	int			map_y;
+	int			margin_x;
+	int			margin_y;
 	t_file		file;
 	t_list		*lst;
 	t_point		point;

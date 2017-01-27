@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:47:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/26 17:42:51 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:37:43 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@ int		**ft_create_int_tab(t_list *lst, t_env *e)
 	int		x;
 	int		y;
 
-	e->file.map = (int**)ft_memalloc(sizeof(int*) * e->file.nb_y);
+	e->file.map = (t_map**)ft_memalloc(sizeof(t_map*) * e->file.nb_y);
 	y = -1;
 	while (++y < e->file.nb_y)
 	{
 		split = ft_strsplit((char*)lst->content, ' ');
-		e->file.map[y] = (int*)ft_memalloc(sizeof(int) * e->file.nb_x);
+		e->file.map[y] = (t_map*)ft_memalloc(sizeof(t_map) * e->file.nb_x);
 		x = -1;
 		while (++x < e->file.nb_x)
 		{
 			free(split[x]);
 //			printf("split: %s\n", split[x]);
 //			printf("split atoi: %d\n", ft_atoi(split[x]));
-			e->file.map[y][x] = ft_atoi(split[x]);
+			e->file.map.x = split[y][x];
+			e->file.map.y = split[y];
+			e->file.map.z = ft_atoi(split[x]);
 //			printf("%d\n", e->map[0][0]);
 		}
 		lst = lst->next;
