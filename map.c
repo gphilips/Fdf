@@ -28,8 +28,6 @@ int		**ft_create_int_tab(t_list *lst, t_env *e)
 		while (++x < e->file.nb_x)
 		{
 			free(split[x]);
-//			if (!(split[y][x] >= '9' && split[y][x] <= '0') && split[y][x] != ' ')
-//				return (NULL);
 //			printf("split: %s\n", split[x]);
 //			printf("split atoi: %d\n", ft_atoi(split[x]));
 			e->file.map[y][x] = ft_atoi(split[x]);

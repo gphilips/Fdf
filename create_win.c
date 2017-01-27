@@ -20,6 +20,7 @@ static int		mouse_hook(int button, int x, int y)
 
 static int		key_hook(int keycode)
 {
+	printf("key: %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
 	return (0);
