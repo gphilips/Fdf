@@ -51,33 +51,38 @@ static int	ft_get_size(t_env *e)
 
 void	ft_print_tab(t_env *e)
 {
-	printf("----- LIST ----\n");
+/*	printf("----- LIST ----\n");
 	t_list	*temp;
-	int	i;
+	int	a;
 
-	i = 0;
+	a = 0;
 	temp = e->lst;
 	while (temp)
 	{
-		printf("Maillon %d:\n", ++i);
+		printf("Maillon %d:\n", ++a);
 		printf("%s\n", temp->content);
 		temp = temp->next;
 	}
-	printf("Nb de col: %d\n", e->file.nb_x);
+*/	printf("Nb de col: %d\n", e->file.nb_x);
 	printf("Nb de ligne: %d\n", e->file.nb_y);
-
 	printf("----- MAP ----\n");
-	int y;
-	int x;
-
+	int y, x, i;
+	i = 0;
 	y= -1;
 	while (++y < e->file.nb_y)
 	{
 		x = -1;
+		printf("Ligne %d:\n", ++i);
 		while (++x < e->file.nb_x)
-			printf("%d  ", e->file.map[y][x]);
+		{
+			printf("-- Point %d --\n", x + 1);
+			printf("x : %d\n", e->file.map[y][x].x);
+			printf("y : %d\n", e->file.map[y][x].y);
+			printf("z : %d\n", e->file.map[y][x].z);
+		}
 		printf("\n");
 	}
+	printf("TEST OK\n");
 }
 
 int		ft_read_file(int fd, t_env *e)

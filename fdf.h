@@ -31,14 +31,20 @@ typedef struct	s_color
 }				t_color;
 */
 
+typedef struct	s_map
+{
+	int		x;
+	int		y;
+	int		z;
+}				t_map;
+
 typedef struct	s_file
 {
-	int			**map;
+	t_map		**map;
+	int			z;
 	int			nb_x;
 	int			nb_y;
-	int			w_space;
-	int			h_space;
-	int			z;
+	int			space;
 }				t_file;
 
 typedef struct	s_point
@@ -61,8 +67,8 @@ typedef struct	s_env
 	void		*win;
 	int			win_x;
 	int			win_y;
-	int			map_x;
-	int			map_y;
+	int			margin_w;
+	int			margin_h;
 	t_file		file;
 	t_list		*lst;
 	t_point		point;
@@ -71,10 +77,10 @@ typedef struct	s_env
 
 t_env	*ft_init_all(t_env *e);
 int		ft_read_file(int fd, t_env *e);
-int		**ft_create_int_tab(t_list *lst, t_env *e);
+t_map	**ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_print_tab(t_env *e);
 void	ft_draw_point(t_env *e);
-void	ft_draw_line(t_env *e);
+void	ft_draw_grid(t_env *e);
 void	ft_create_win(t_env *e);
 int		ft_error(int n);
 #endif

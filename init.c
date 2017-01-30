@@ -30,16 +30,15 @@ t_env		*ft_init_all(t_env *e)
 {
 	e->mlx = NULL;
 	e->win = NULL;
-	e->win_x = 600;
-	e->win_y = 600;
-	e->map_x = 0;	
-	e->map_y = 0;	
+	e->win_x = 1000;
+	e->win_y = 500;
+	e->margin_w = 150;	
+	e->margin_h = 70;	
 	e->file.nb_x = 0;
 	e->file.nb_y = 0;
 	e->file.map = NULL;
-	e->file.w_space = 20;
-	e->file.h_space = 20;
-	e->file.z = 10;
+	e->file.space = 30;
+	e->file.z = 10;	
 	ft_init_point(e);
 	return (e);
 }
