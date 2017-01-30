@@ -6,43 +6,48 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/27 17:59:42 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/01/26 18:38:59 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_draw_line(t_env *e)
+static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 {
-	e->point.dx = abs(e->point.x2 - e->point.x1);
-	e->point.dy = abs(e->point.y2 - e->point.y1);
-	e->point.sx = (e->point.x1 < e->point.x2) ? 1 : -1;
-	e->point.sy = (e->point.y1 < e->point.y2) ? 1 : -1;
-	e->point.err1 = e->point.dx + e->point.dy;
-	while (e->point.x1 < e->point.x2 || e->point.y1 < e->point.y2)
+	int		color;
+
+	color = (p1.z == 0 && p2.z == 0) ? 0x00FFFFFF : 0x0000FFFF;
+	mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, color);
+}
+
+static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
+{
+	t_point		p;
+	
+	p = e->point;
+	p.dx = abs(p2.x - p1.x);
+	p.dy = abs(p2.y - p1.y);
+	p.sx = (p1.x < p2.x) ? 1 : -1;
+	p.sy = (p1.y < p2.y) ? 1 : -1;
+	p.err1 = (p.dx > p.dy ? p.dx : -p.dy) / 2;
+	while (p1.x <= p2.x && p1.y <= p2.y)
 	{
-		mlx_pixel_put(e->mlx, e->win, e->point.x1, e->point.y1, 0x00FFFFFF);
-		e->point.err2 = 2 * e->point.err1;
-		if (e->point.err2 <= e->point.dx)
+		ft_pixel_put(e, p1, p2);
+		p.err2 = p.err1;
+		if (p.err2 > -p.dx)
 		{
-			e->point.err1 += e->point.dx;
-			e->point.x1 += e->point.sx;
+			p.err1 -= p.dy;
+			p1.x += p.sx;
 		}
-		if (e->point.err2 >= e->point.dy)
+		if (p.err2 < p.dy)
 		{
-			e->point.err1 += e->point.dy;
-			e->point.y1 += e->point.sy;
+			p.err1 += p.dx;
+			p1.y += p.sy;
 		}
 	}
 }
 
-static void		ft_iso(int x, int y, t_env *e)
-{
-	e->point.x1 = e->margin_x + (x - y) * (e->file.w_space / 2);
-	e->point.y1 = e->margin_y + (x + y) * (e->file.h_space / 2);
-}
-
-void	ft_draw_point(t_env *e)
+void			ft_draw_grid(t_env *e)
 {
 	int		y;
 	int		x;
@@ -53,30 +58,11 @@ void	ft_draw_point(t_env *e)
 		x = -1;
 		while (++x < e->file.nb_x)
 		{
-			ft_iso(x, y, e);
-			if (e->file.map[y][x] == 0)
-				mlx_pixel_put(e->mlx, e->win, e->point.x1, e->point.y1, 0x00FFFFFF);
-//				mlx_pixel_put(e->mlx, e->win, e->map_x + x * e->file.w_space, e->map_y + y * e->file.h_space, 0x00FFFFFF);
-			else
-				mlx_pixel_put(e->mlx, e->win, e->point.x1, e->point.y1, 0x0000FFFF);
-//				mlx_pixel_put(e->mlx, e->win, e->map_x + x * e->file.w_space, e->map_y + y * e->file.h_space, 0x0000FFFF);
+			if (x < e->file.nb_x - 1)
+				ft_draw_line(e, e->file.map[y][x], e->file.map[y][x + 1]);
+			if (y < e->file.nb_y - 1)
+				ft_draw_line(e, e->file.map[y][x], e->file.map[y + 1][x]);
 		}
 	}
-}
-/*
-void	ft_draw_grid(t_env *e)
-{
-	int		y;
-	int		x;
 
-	y = -1;
-	while (++y < e->file.nb_y)
-	{
-		x = -1;
-		while (++x < e->file.nb_x)
-		{
-			ft_iso(x, y, e);
-			ft_draw_line(e);
-		}
-	}
-}*/
+}

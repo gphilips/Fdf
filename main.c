@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:06 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/26 18:40:25 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:05:13 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		main(int argc, char **argv)
 		return (ft_error(3) == -1 ? -1 : 0);
 	if (!(ft_create_int_tab(e->lst, e)))
 		return (ft_error(4) == -1 ? -1 : 0);
-	ft_print_tab(e); // PRINT TEST
+//	ft_print_tab(e); // PRINT TEST
 	ft_create_win(e);
 	if ((close(fd)) == -1)
 		return (ft_error(2) == -1 ? -1 : 0);
