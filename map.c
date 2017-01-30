@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int		**ft_create_int_tab(t_list *lst, t_env *e)
+t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 {
 	char	**split;
 	int		x;
@@ -30,9 +30,9 @@ int		**ft_create_int_tab(t_list *lst, t_env *e)
 			free(split[x]);
 //			printf("split: %s\n", split[x]);
 //			printf("split atoi: %d\n", ft_atoi(split[x]));
-			e->file.map.x = split[y][x];
-			e->file.map.y = split[y];
-			e->file.map.z = ft_atoi(split[x]);
+			e->file.map[y][x].x = x * e->file.space;
+			e->file.map[y][x].y = y * e->file.space;
+			e->file.map[y][x].z = ft_atoi(split[x]);
 //			printf("%d\n", e->map[0][0]);
 		}
 		lst = lst->next;

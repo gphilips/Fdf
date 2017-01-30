@@ -38,7 +38,6 @@ t_env		*ft_init_all(t_env *e)
 	e->file.nb_y = 0;
 	e->file.map = NULL;
 	e->file.space = 30;
-	e->file.z = 10;	
 	ft_init_point(e);
 	return (e);
 }
