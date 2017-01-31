@@ -43,7 +43,8 @@ typedef struct	s_file
 	t_map		**map;
 	int			nb_x;
 	int			nb_y;
-	int			space;
+	int			space_w;
+	int			space_h;
 }				t_file;
 
 typedef struct	s_point
@@ -66,8 +67,8 @@ typedef struct	s_env
 	void		*win;
 	int			win_x;
 	int			win_y;
-	int			margin_w;
-	int			margin_h;
+	int			margin_l;
+	int			margin_t;
 	t_file		file;
 	t_list		*lst;
 	t_point		point;

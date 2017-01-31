@@ -30,7 +30,6 @@ void			ft_create_win(t_env *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
-//	ft_draw_point(e);
 	ft_draw_grid(e);
 	mlx_key_hook(e->win, key_hook, &e);
 	mlx_mouse_hook(e->win, mouse_hook, &e);
