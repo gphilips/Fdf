@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int		ft_error(int n)
+static int		ft_error(int n)
 {
 	if (n == 1)
 		ft_putendl_fd("usage: ./fdf <filename> [ case_size z_size ]", 2);

@@ -14,10 +14,6 @@
 
 static void	ft_init_point(t_env *e)
 {
-	e->point.x1 = 0;
-	e->point.y1 = 0;
-	e->point.x2 = 0;
-	e->point.x2 = 0;
 	e->point.dx = 0;
 	e->point.dy = 0;
 	e->point.sx = 0;
@@ -33,12 +29,14 @@ static void	ft_init_file(t_env *e)
 	e->file.map = NULL;
 	e->file.space_w = 30;
 	e->file.space_h = 15;
+	e->file.depth = 0;
 }
 
 t_env		*ft_init_all(t_env *e)
 {
 	e->mlx = NULL;
 	e->win = NULL;
+	e->img = NULL;
 	e->win_x = 1000;
 	e->win_y = 600;
 	e->margin_l = 0;

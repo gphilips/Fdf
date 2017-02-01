@@ -21,21 +21,12 @@
 # include <math.h>
 
 # include <stdio.h>
-/*
-typedef struct	s_color
-{
-	int			color;
-	int			red;
-	int			green;
-	int			blue;
-}				t_color;
-*/
 
 typedef struct	s_map
 {
-	int		x;
-	int		y;
-	int		z;
+	int			x;
+	int			y;
+	int			z;
 }				t_map;
 
 typedef struct	s_file
@@ -45,14 +36,11 @@ typedef struct	s_file
 	int			nb_y;
 	int			space_w;
 	int			space_h;
+	int			depth;
 }				t_file;
 
 typedef struct	s_point
 {
-	int			x1;
-	int			y1;
-	int			x2;
-	int			y2;
 	int			dx;
 	int			dy;
 	int			sx;
@@ -65,6 +53,7 @@ typedef struct	s_env
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
 	int			win_x;
 	int			win_y;
 	int			margin_l;
@@ -73,15 +62,13 @@ typedef struct	s_env
 	t_file		file;
 	t_list		*lst;
 	t_point		point;
-//	t_color		color;
 }				t_env;
 
 t_env	*ft_init_all(t_env *e);
 int		ft_read_file(int fd, t_env *e);
 t_map	**ft_create_int_tab(t_list *lst, t_env *e);
-void	ft_print_tab(t_env *e);
-void	ft_draw_point(t_env *e);
+void	ft_print_tab(t_env *e); // A SUPPRIMER
 int		ft_draw_grid(t_env *e);
+void	ft_draw_img(t_env *e);
 void	ft_create_win(t_env *e);
-int		ft_error(int n);
 #endif

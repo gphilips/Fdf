@@ -46,11 +46,34 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 	}
 }
 
-int			ft_draw_grid(t_env *e)
+static void	ft_3d(t_env *e)
 {
 	int		y;
 	int		x;
 
+	y = 0;
+	while (++y < e->file.nb_y)
+	{
+		x = 0;
+		while (++x < e->file.nb_x)
+		{
+			if ((e->file.map[y][x - 1].z == 0 && e->file.map[y][x].z > 0)
+				|| (e->file.map[y][x + 1].z == 0 && e->file.map[y][x].z > 0)
+				|| (e->file.map[y][x + 1].z > 0 && e->file.map[y][x].z > 0))
+			{
+				e->file.map[y][x].x -= e->file.map[y][x].z + e->file.depth;
+				e->file.map[y][x].y -= e->file.map[y][x].z + e->file.depth;
+			}
+		}
+	}
+}
+
+int			ft_draw_grid(t_env *e)
+{
+	int		y;
+	int		x;
+	
+	ft_3d(e);
 	y = -1;
 	while (++y < e->file.nb_y)
 	{
@@ -58,7 +81,9 @@ int			ft_draw_grid(t_env *e)
 		while (++x < e->file.nb_x)
 		{
 			if (x < e->file.nb_x - 1)
+			{
 				ft_draw_line(e, e->file.map[y][x], e->file.map[y][x + 1]);
+			}
 			if (y < e->file.nb_y - 1)
 				ft_draw_line(e, e->file.map[y][x], e->file.map[y + 1][x]);
 		}
