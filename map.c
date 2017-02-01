@@ -30,9 +30,24 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 			free(split[x]);
 //			printf("split: %s\n", split[x]);
 //			printf("split atoi: %d\n", ft_atoi(split[x]));
-			e->file.map[y][x].x = e->margin_l + (x - y) * (e->file.space_w / 2);
-			e->file.map[y][x].y = e->margin_t + (x + y) * (e->file.space_h / 2);
-			e->file.map[y][x].z = ft_atoi(split[x]);
+			if (e->proj == 1)
+			{
+				e->margin_l = (e->win_x / 4) * 2;
+				e->margin_t = (e->win_y / 4) * 2;
+				e->file.map[y][x].x = e->margin_l + (x - y) * (e->file.space_w / 2);
+				e->file.map[y][x].y = e->margin_t + (x + y) * (e->file.space_h / 2);
+				e->file.map[y][x].z = ft_atoi(split[x]);
+			}
+			if (e->proj == 0)
+			{
+				e->margin_l = (e->win_x / 2) / 2;
+				e->margin_t = (e->win_y / 4);
+				e->file.map[y][x].x = e->margin_l + x * e->file.space_w;
+				e->file.map[y][x].y = e->margin_t + y * e->file.space_h;
+				e->file.map[y][x].z = ft_atoi(split[x]);
+			}
+			if (ft_isalpha(e->file.map[y][x].z))
+				return (NULL);
 		}
 		lst = lst->next;
 	}

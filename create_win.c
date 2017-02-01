@@ -18,11 +18,12 @@ static int		mouse_hook(int button, int x, int y)
 	return (0);
 }
 
-static int		key_hook(int keycode)
+static int		key_hook(int keycode, t_env *e)
 {
 	printf("key: %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
+	e->proj = (keycode == 48 && e->proj == 1) ? 0 : 1;
 	return (0);
 }
 

@@ -31,8 +31,8 @@ static void	ft_init_file(t_env *e)
 	e->file.nb_x = 0;
 	e->file.nb_y = 0;
 	e->file.map = NULL;
-	e->file.space_w = 60;
-	e->file.space_h = 30;
+	e->file.space_w = 30;
+	e->file.space_h = 15;
 }
 
 t_env		*ft_init_all(t_env *e)
@@ -40,9 +40,10 @@ t_env		*ft_init_all(t_env *e)
 	e->mlx = NULL;
 	e->win = NULL;
 	e->win_x = 1000;
-	e->win_y = 500;
-	e->margin_l = (e->win_x / 2);
-	e->margin_t = (e->win_y / 10);
+	e->win_y = 600;
+	e->margin_l = 0;
+	e->margin_t = 0;
+	e->proj = 1;
 	ft_init_point(e);
 	ft_init_file(e);
 	return (e);

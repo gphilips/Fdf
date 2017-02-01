@@ -27,9 +27,11 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 	e->point.sx = (p1.x < p2.x) ? 1 : -1;
 	e->point.sy = (p1.y < p2.y) ? 1 : -1;
 	e->point.err1 = (e->point.dx > e->point.dy ? e->point.dx : -e->point.dy) / 2;
-	while (p1.x <= p2.x && p1.y <= p2.y)
+	while (1)
 	{
 		ft_pixel_put(e, p1, p2);
+		if (p1.x == p2.x && p1.y == p2.y)
+			break ;
 		e->point.err2 = e->point.err1;
 		if (e->point.err2 >= -e->point.dx)
 		{
@@ -43,14 +45,8 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 		}
 	}
 }
-/*
-static void	 	ft_depth(t_env *e, int x, int y)
-{
-	if (e->file.map[x][y].z > 0)
-		e->file.map[y][x].y += 30;
-}
-*/
-void			ft_draw_grid(t_env *e)
+
+int			ft_draw_grid(t_env *e)
 {
 	int		y;
 	int		x;
@@ -61,12 +57,11 @@ void			ft_draw_grid(t_env *e)
 		x = -1;
 		while (++x < e->file.nb_x)
 		{
-//			ft_depth(e, x, y);
 			if (x < e->file.nb_x - 1)
 				ft_draw_line(e, e->file.map[y][x], e->file.map[y][x + 1]);
 			if (y < e->file.nb_y - 1)
-				ft_draw_line(e, e->file.map[y][x], e->file.map[y +1][x]);
+				ft_draw_line(e, e->file.map[y][x], e->file.map[y + 1][x]);
 		}
 	}
-
+	return (0);
 }

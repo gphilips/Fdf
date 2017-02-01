@@ -69,6 +69,7 @@ typedef struct	s_env
 	int			win_y;
 	int			margin_l;
 	int			margin_t;
+	int			proj;
 	t_file		file;
 	t_list		*lst;
 	t_point		point;
@@ -80,7 +81,7 @@ int		ft_read_file(int fd, t_env *e);
 t_map	**ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_print_tab(t_env *e);
 void	ft_draw_point(t_env *e);
-void	ft_draw_grid(t_env *e);
+int		ft_draw_grid(t_env *e);
 void	ft_create_win(t_env *e);
 int		ft_error(int n);
 #endif
