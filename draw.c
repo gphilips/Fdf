@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 16:49:17 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 18:59:18 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 	e->point.err1 = (e->point.dx > e->point.dy ? e->point.dx : -e->point.dy) / 2;
 	while (1)
 	{
-		ft_pixel_put(e, p1, p2);
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
 		e->point.err2 = e->point.err1;
@@ -43,6 +42,7 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 			e->point.err1 += e->point.dx;
 			p1.y += e->point.sy;
 		}
+		ft_pixel_put(e, p1, p2);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:47:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 18:01:18 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 20:01:26 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,13 @@ static void	ft_iso(t_env *e, int x, int y)
 {
 	if (e->proj == 1)
 	{
-		e->margin_l = (e->win_x / 4) * 2;
-		e->margin_t = (e->win_y / 4) * 2;
-		e->file.map[y][x].x = e->margin_l + (x - y) * (e->file.space_w / 2);
-		e->file.map[y][x].y = e->margin_t + (x + y) * (e->file.space_h / 2);
+		e->file.map[y][x].x = e->margin_l + (x - y) * (e->file.space / 2);
+		e->file.map[y][x].y = e->margin_t + (x + y) * (e->file.space / 2);
 	}
 	if (e->proj == 0)
 	{
-		e->margin_l = (e->win_x / 2) / 2;
-		e->margin_t = (e->win_y / 4);
-		e->file.map[y][x].x = e->margin_l + x * e->file.space_w;
-		e->file.map[y][x].y = e->margin_t + y * e->file.space_h;
+		e->file.map[y][x].x = e->margin_l + x * e->file.space;
+		e->file.map[y][x].y = e->margin_t + y * e->file.space;
 	}
 }
 

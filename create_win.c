@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 18:35:30 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 19:19:03 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	mouse_hook(int button, int x, int y)
 
 static int	key_hook(int keycode, t_env *e)
 {
+	mlx_clear_window(e->mlx, e->win);
 	printf("key: %d\n", keycode);
 	if (keycode == ESC)
 		exit(0);
@@ -34,8 +35,7 @@ static int	key_hook(int keycode, t_env *e)
 		ft_move(keycode, e);
 	else if (keycode == ENT)
 		ft_reinit(e);
-//	mlx_clear_window(e->mlx, e->win);
-//	ft_draw_grid(e);
+
 	return (0);
 }
 

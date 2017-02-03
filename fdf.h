@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 18:35:26 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 19:24:07 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define ESC 53
 # define TAB 48
 # define ENT 36
-# define PLUS 78
-# define MIN 269
+# define PLUS 69
+# define MIN 78
 # define UP 126
 # define DOWN 125
 # define LEFT 123
@@ -46,8 +46,7 @@ typedef struct	s_file
 	t_map		**map;
 	int			nb_x;
 	int			nb_y;
-	int			space_w;
-	int			space_h;
+	int			space;
 	int			depth;
 }				t_file;
 

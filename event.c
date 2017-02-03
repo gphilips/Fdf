@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 16:57:29 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 18:37:23 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 19:25:11 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_change_depth(int key, t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	if (key == PLUS)
-		e->file.depth -= 5;
-	else if (key == MIN)
 		e->file.depth += 5;
+	else if (key == MIN)
+		e->file.depth -= 5;
 	ft_create_int_tab(e->lst, e);
 	ft_draw_grid(e);
 }
@@ -38,15 +38,9 @@ void	ft_zoom(int key, t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	if (key == FRONT)
-	{
-		e->file.space_w += 5;
-		e->file.space_h += 5;
-	}
+		e->file.space += 5;
 	else if (key == BACK)
-	{
-		e->file.space_w -= 5;
-		e->file.space_h -= 5;
-	}
+		e->file.space -= 5;
 	ft_create_int_tab(e->lst, e);
 	ft_draw_grid(e);
 }
@@ -55,13 +49,13 @@ void	ft_move(int key, t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	if (key == UP)
-		e->margin_t -= 5;
+		e->margin_t -= 10;
 	if (key == DOWN)
-		e->margin_t += 5;
+		e->margin_t += 10;
 	if (key == LEFT)
-		e->margin_l -= 5;
+		e->margin_l -= 10;
 	if (key == RIGHT)
-		e->margin_l -= 5;
+		e->margin_l += 10;
 	ft_create_int_tab(e->lst, e);
 	ft_draw_grid(e);
 }
@@ -71,6 +65,7 @@ void	ft_reinit(t_env *e)
 	mlx_clear_window(e->mlx, e->win);
 	e->proj = 1;
 	e->file.depth = 0;
+	e->file.space = 15;
 	ft_create_int_tab(e->lst, e);
 	ft_draw_grid(e);
 }

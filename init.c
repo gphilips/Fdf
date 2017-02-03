@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:32 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 16:00:01 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 20:03:23 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static void	ft_init_file(t_env *e)
 	e->file.nb_x = 0;
 	e->file.nb_y = 0;
 	e->file.map = NULL;
-	e->file.space_w = 30;
-	e->file.space_h = 15;
+	e->file.space = 30;
 	e->file.depth = 10;
 }
 
@@ -38,8 +37,8 @@ t_env		*ft_init_all(t_env *e)
 	e->win = NULL;
 	e->win_x = 1000;
 	e->win_y = 600;
-	e->margin_l = 0;
-	e->margin_t = 0;
+	e->margin_l = 300;
+	e->margin_t = 100;
 	e->proj = 1;
 	ft_init_point(e);
 	ft_init_file(e);
