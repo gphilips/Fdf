@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 20:19:31 by gphilips          #+#    #+#             */
-/*   Updated: 2016/11/19 15:20:54 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 16:52:51 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int			ft_atoi(char const *s)
 	int		i;
 	int		result;
 
+	result = 0;
 	negative = 0;
 	i = 0;
 	while (s[i] == '\t' || s[i] == '\n' || s[i] == ' '
