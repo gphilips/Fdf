@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:47:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/27 18:37:43 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 18:01:18 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,9 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 		x = -1;
 		while (++x < e->file.nb_x)
 		{
-			free(split[x]);
-//			printf("split: %s\n", split[x]);
-//			printf("split atoi: %d\n", ft_atoi(split[x]));
 			e->file.map[y][x].z = ft_atoi(split[x]);
 			ft_iso(e, x, y);
+			free(split[x]);
 		}
 		lst = lst->next;
 	}

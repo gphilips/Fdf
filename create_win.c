@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/26 18:24:09 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 18:35:30 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,36 @@ static int	mouse_hook(int button, int x, int y)
 static int	key_hook(int keycode, t_env *e)
 {
 	printf("key: %d\n", keycode);
-	if (keycode == 53)
+	if (keycode == ESC)
 		exit(0);
-	if (keycode == 48 && e->proj == 1)
-		e->proj = 0;
-	else if (keycode == 48 && e->proj == 0)
-		e->proj = 1;
-	if (keycode == 44)
-		e->file.depth += 5;
-	if (keycode == 24)
-		e->file.depth -= 5;
-	if (keycode == 36)
-	{
-		e->proj = 1;
-		e->file.depth = 0;
-	}
+	else if (keycode == TAB)
+		ft_change_proj(e);
+	else if (keycode == PLUS || keycode == MIN)
+		ft_change_depth(keycode, e);
+	else if (keycode == FRONT || keycode == BACK)
+		ft_zoom(keycode, e);
+	else if (keycode == UP || keycode == DOWN
+			|| keycode == LEFT || keycode == RIGHT)
+		ft_move(keycode, e);
+	else if (keycode == ENT)
+		ft_reinit(e);
+//	mlx_clear_window(e->mlx, e->win);
+//	ft_draw_grid(e);
 	return (0);
 }
-/*
+
 int			expose_hook(t_env *e)
 {
-	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
-	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	ft_draw_grid(e);
-	mlx_destroy_image(e->mlx, e->img);
 	return (0);
 }
-*/
+
 void		ft_create_win(t_env *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
-	mlx_key_hook(e->win, key_hook, &e);
-	mlx_mouse_hook(e->win, mouse_hook, &e);
-	ft_draw_grid(e);
-	//mlx_expose_hook(e->win, expose_hook, &e);
+	mlx_key_hook(e->win, key_hook, e);
+	mlx_mouse_hook(e->win, mouse_hook, e);
+	mlx_expose_hook(e->win, expose_hook, e);
 	mlx_loop(e->mlx);
 }

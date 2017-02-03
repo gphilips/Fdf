@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/26 18:38:59 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/03 16:49:17 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,18 @@ static void	ft_3d(t_env *e)
 				|| (e->file.map[y][x + 1].z == 0 && e->file.map[y][x].z > 0)
 				|| (e->file.map[y][x + 1].z > 0 && e->file.map[y][x].z > 0))
 			{
-				e->file.map[y][x].x -= e->file.map[y][x].z + e->file.depth;
-				e->file.map[y][x].y -= e->file.map[y][x].z + e->file.depth;
+				e->file.map[y][x].x -= (e->file.map[y][x].z + e->file.depth) / 2;
+				e->file.map[y][x].y -= (e->file.map[y][x].z + e->file.depth) / 2;
 			}
 		}
 	}
 }
 
-int			ft_draw_grid(t_env *e)
+void		ft_draw_grid(t_env *e)
 {
 	int		y;
 	int		x;
-	
+
 	ft_3d(e);
 	y = -1;
 	while (++y < e->file.nb_y)
@@ -88,5 +88,4 @@ int			ft_draw_grid(t_env *e)
 				ft_draw_line(e, e->file.map[y][x], e->file.map[y + 1][x]);
 		}
 	}
-	return (0);
 }
