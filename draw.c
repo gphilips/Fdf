@@ -16,7 +16,14 @@ static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 {
 	int		color;
 
-	color = (p1.z == 0 && p2.z == 0) ? 0x00FFFFFF : 0x0000FFFF;
+	if (p1.z == 0 && p2.z == 0)
+		color = 0x00FFFFFF;
+	else if ((p1.z != 0 || p2.z != 0) && e->file.depth < -10)
+		color = 0x00003399;
+	else if (p1.z == 0 && p2.z != 0)
+		color = 0x00003399;
+	else
+		color = 0x003399FF;
 	mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, color);
 }
 
@@ -27,10 +34,8 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 	e->point.sx = (p1.x < p2.x) ? 1 : -1;
 	e->point.sy = (p1.y < p2.y) ? 1 : -1;
 	e->point.err1 = (e->point.dx > e->point.dy ? e->point.dx : -e->point.dy) / 2;
-	while (1)
+	while (p1.x != p2.x || p1.y != p2.y)
 	{
-		if (p1.x == p2.x && p1.y == p2.y)
-			break ;
 		e->point.err2 = e->point.err1;
 		if (e->point.err2 >= -e->point.dx)
 		{
@@ -50,19 +55,24 @@ static void	ft_3d(t_env *e)
 {
 	int		y;
 	int		x;
+	t_file	f;
 
-	y = 0;
+	f = e->file;
+	y = -1;
 	while (++y < e->file.nb_y)
 	{
-		x = 0;
+		x = -1;
 		while (++x < e->file.nb_x)
 		{
-			if ((e->file.map[y][x - 1].z == 0 && e->file.map[y][x].z > 0)
-				|| (e->file.map[y][x + 1].z == 0 && e->file.map[y][x].z > 0)
-				|| (e->file.map[y][x + 1].z > 0 && e->file.map[y][x].z > 0))
+			if (f.map[y][x].z > 0)
 			{
-				e->file.map[y][x].x -= (e->file.map[y][x].z + e->file.depth) / 2;
-				e->file.map[y][x].y -= (e->file.map[y][x].z + e->file.depth) / 2;
+				f.map[y][x].x -= (f.map[y][x].z + f.depth) / f.nb_x;
+				f.map[y][x].y -= (f.map[y][x].z + f.depth) * f.nb_y;
+			}
+			else if (f.map[y][x].z < 0)
+			{
+				f.map[y][x].x += (f.map[y][x].z + f.depth) / f.nb_x;
+				f.map[y][x].y += (f.map[y][x].z + f.depth) * f.nb_y;
 			}
 		}
 	}
