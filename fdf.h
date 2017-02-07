@@ -18,9 +18,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <mlx.h>
-# include <math.h>
-
-# include <stdio.h>
 
 # define ESC 53
 # define TAB 48
@@ -33,6 +30,16 @@
 # define RIGHT 124
 # define FRONT 3
 # define BACK 11
+# define RED 12
+# define GREEN 13
+# define BLUE 14
+
+typedef struct	s_color
+{
+	int		r;
+	int		g;
+	int		b;
+}				t_color;
 
 typedef struct	s_map
 {
@@ -44,6 +51,7 @@ typedef struct	s_map
 typedef struct	s_file
 {
 	t_map		**map;
+	char		**split;
 	int			nb_x;
 	int			nb_y;
 	int			space;
@@ -69,21 +77,27 @@ typedef struct	s_env
 	int			margin_l;
 	int			margin_t;
 	int			proj;
+	void		*img;
+	char		*data;
+	int			bpp;
+	int			sizeline;
+	int			endian;
 	t_file		file;
 	t_list		*lst;
 	t_point		point;
+	t_color		color;
 }				t_env;
 
 t_env	*ft_init_all(t_env *e);
 int		ft_read_file(int fd, t_env *e);
 t_map	**ft_create_int_tab(t_list *lst, t_env *e);
-void	ft_print_tab(t_env *e); // A SUPPRIMER
 void	ft_draw_grid(t_env *e);
-void	ft_draw_img(t_env *e);
 void	ft_create_win(t_env *e);
 void	ft_change_proj(t_env *e);
 void	ft_change_depth(int key, t_env *e);
 void	ft_zoom(int key, t_env *e);
 void	ft_move(int key, t_env *e);
 void	ft_reinit(t_env *e);
+void	ft_change_color(int key, t_env *e);
+int		ft_expose_hook(t_env *e);
 #endif

@@ -12,19 +12,52 @@
 
 #include "fdf.h"
 
-static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
+static void		ft_color_depth(t_env *e, t_map p1, t_map p2)
 {
 	int		color;
 
 	if (p1.z == 0 && p2.z == 0)
-		color = 0x00FFFFFF;
+	{
+		e->color.r = 255;
+		e->color.g = 255;
+		e->color.b = 255;
+	}
 	else if ((p1.z != 0 || p2.z != 0) && e->file.depth < -10)
-		color = 0x00003399;
+	{
+		e->color.r = 0;
+		e->color.g = 33;
+		e->color.b = 99;
+//	color = 0x00003399;
+	}
 	else if (p1.z == 0 && p2.z != 0)
-		color = 0x00003399;
+	{
+		e->color.r = 0;
+		e->color.g = 33;
+		e->color.b = 99;
+//	color = 0x00003399;
+	}
 	else
-		color = 0x003399FF;
-	mlx_pixel_put(e->mlx, e->win, p1.x, p1.y, color);
+	{
+		e->color.r = 33;
+		e->color.g = 99;
+		e->color.b = FF;
+//		color = 0x003399FF;
+	}
+}
+
+static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
+{
+	int		i;
+
+	if ((p1.x > 0 && p1.x < e->win_x) && (p1.y > 0 && p1.y < e->win_y))
+	{
+		i = (p1.y * e->sizeline) + (p1.x * e->bpp / 8);
+		e->data[i] = e->color.r;
+		e->data[i + 1] = e->color.g;
+		e->data[i + 2] = e->color.b;
+	}
+	ft_color_depth(e, p1, p2);
+
 }
 
 static void		ft_draw_line(t_env *e, t_map p1, t_map p2)

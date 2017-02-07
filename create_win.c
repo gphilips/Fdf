@@ -33,7 +33,7 @@ static void	ft_instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 100, 0x00FFFFFF, reinit);
 }
 
-static int	mouse_hook(int button, int x, int y)
+static int	ft_mouse_hook(int button, int x, int y)
 {
 	ft_putstr("Mouse ");
 	ft_putnbr(button);
@@ -45,7 +45,7 @@ static int	mouse_hook(int button, int x, int y)
 	return (0);
 }
 
-static int	key_hook(int keycode, t_env *e)
+static int	ft_key_hook(int keycode, t_env *e)
 {
 	ft_putstr("key: ");
 	ft_putnbr(keycode);
@@ -63,12 +63,20 @@ static int	key_hook(int keycode, t_env *e)
 		ft_move(keycode, e);
 	else if (keycode == ENT)
 		ft_reinit(e);
+	else if (keycode == RED || keycode == GREEN || keycode == BLUE)
+		ft_change_color(keycode, e);
+	ft_expose_hook(e);
 	return (0);
 }
 
-int			expose_hook(t_env *e)
+int			ft_expose_hook(t_env *e)
 {
+	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
+	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
+	ft_create_int_tab(e->lst, e);
 	ft_draw_grid(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	mlx_destroy_image(e->mlx, e->img);
 	return (0);
 }
 
@@ -77,8 +85,8 @@ void		ft_create_win(t_env *e)
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
 	ft_instruction(e);
-	mlx_key_hook(e->win, key_hook, e);
-	mlx_mouse_hook(e->win, mouse_hook, e);
-	mlx_expose_hook(e->win, expose_hook, e);
+	mlx_key_hook(e->win, ft_key_hook, e);
+	mlx_mouse_hook(e->win, ft_mouse_hook, e);
+	mlx_expose_hook(e->win, ft_expose_hook, e);
 	mlx_loop(e->mlx);
 }

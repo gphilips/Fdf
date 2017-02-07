@@ -24,7 +24,6 @@ static int	ft_get_size(t_env *e)
 {
 	int		i;
 	int		flag;
-	char	**split;
 	int		tmp_x;
 	t_list	*tmp;
 
@@ -32,14 +31,14 @@ static int	ft_get_size(t_env *e)
 	tmp = e->lst;
 	while (tmp)
 	{
-		split = ft_strsplit(tmp->content, ' ');
+		e->file.split = ft_strsplit(tmp->content, ' ');
 		i = 0;
-		while (split[i])
+		while (e->file.split[i])
 		{
 			i++;
-			free(split[i]);
+			free(e->file.split[i]);
 		}
-		free(split);
+		free(e->file.split);
 		if (e->file.nb_x == 0 && flag == 0)
 		{
 			flag = 1;
@@ -53,43 +52,7 @@ static int	ft_get_size(t_env *e)
 	return (0);
 }
 
-void	ft_print_tab(t_env *e)
-{
-/*	printf("----- LIST ----\n");
-	t_list	*temp;
-	int	a;
-
-	a = 0;
-	temp = e->lst;
-	while (temp)
-	{
-		printf("Maillon %d:\n", ++a);
-		printf("%s\n", temp->content);
-		temp = temp->next;
-	}
-*/	printf("Nb de col: %d\n", e->file.nb_x);
-	printf("Nb de ligne: %d\n", e->file.nb_y);
-	printf("----- MAP ----\n");
-	int y, x, i;
-	i = 0;
-	y= -1;
-	while (++y < e->file.nb_y)
-	{
-		x = -1;
-		printf("Ligne %d:\n", ++i);
-		while (++x < e->file.nb_x)
-		{
-			printf("-- Point %d --\n", x + 1);
-			printf("x : %d\n", e->file.map[y][x].x);
-			printf("y : %d\n", e->file.map[y][x].y);
-			printf("z : %d\n", e->file.map[y][x].z);
-		}
-		printf("\n");
-	}
-	printf("TEST OK\n");
-}
-
-int		ft_read_file(int fd, t_env *e)
+int			ft_read_file(int fd, t_env *e)
 {
 	char	*line;
 	t_list	*start;
