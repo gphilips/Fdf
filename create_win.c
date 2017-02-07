@@ -6,12 +6,12 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 19:19:03 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/07 19:24:03 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*
 static void	ft_instruction(t_env *e)
 {
 	char	*iso;
@@ -32,8 +32,8 @@ static void	ft_instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 80, 0x00FFFFFF, proj);
 	mlx_string_put(e->mlx, e->win, 10, 100, 0x00FFFFFF, reinit);
 }
-
-static int	ft_mouse_hook(int button, int x, int y)
+*/
+static int	ft_mouse_hook(int button, int x, int y, t_env *e)
 {
 	ft_putstr("Mouse ");
 	ft_putnbr(button);
@@ -42,6 +42,11 @@ static int	ft_mouse_hook(int button, int x, int y)
 	ft_putstr(" | y: ");
 	ft_putnbr(y);
 	ft_putchar('\n');
+	if (button == 1)
+		e->file.space += 5;
+	else if (button == 2)
+		e->file.space -= 5;
+	ft_expose_hook(e);
 	return (0);
 }
 
@@ -63,8 +68,6 @@ static int	ft_key_hook(int keycode, t_env *e)
 		ft_move(keycode, e);
 	else if (keycode == ENT)
 		ft_reinit(e);
-	else if (keycode == RED || keycode == GREEN || keycode == BLUE)
-		ft_change_color(keycode, e);
 	ft_expose_hook(e);
 	return (0);
 }
@@ -84,9 +87,9 @@ void		ft_create_win(t_env *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
-	ft_instruction(e);
 	mlx_key_hook(e->win, ft_key_hook, e);
 	mlx_mouse_hook(e->win, ft_mouse_hook, e);
+	//ft_instruction(e);
 	mlx_expose_hook(e->win, ft_expose_hook, e);
 	mlx_loop(e->mlx);
 }

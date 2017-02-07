@@ -6,42 +6,31 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 18:59:18 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/07 19:41:21 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		ft_color_depth(t_env *e, t_map p1, t_map p2)
+static void		ft_change_color(t_env *e, t_map p1, t_map p2)
 {
-	int		color;
-
 	if (p1.z == 0 && p2.z == 0)
 	{
 		e->color.r = 255;
 		e->color.g = 255;
 		e->color.b = 255;
 	}
-	else if ((p1.z != 0 || p2.z != 0) && e->file.depth < -10)
+	else if ((p1.z != 0 || p2.z != 0) && ((e->file.depth + p1.z) < 0))
 	{
 		e->color.r = 0;
-		e->color.g = 33;
-		e->color.b = 99;
-//	color = 0x00003399;
-	}
-	else if (p1.z == 0 && p2.z != 0)
-	{
-		e->color.r = 0;
-		e->color.g = 33;
-		e->color.b = 99;
-//	color = 0x00003399;
+		e->color.g = 55;
+		e->color.b = 153;
 	}
 	else
 	{
-		e->color.r = 33;
-		e->color.g = 99;
-		e->color.b = FF;
-//		color = 0x003399FF;
+		e->color.r = 51;
+		e->color.g = 153;
+		e->color.b = 255;
 	}
 }
 
@@ -52,11 +41,11 @@ static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 	if ((p1.x > 0 && p1.x < e->win_x) && (p1.y > 0 && p1.y < e->win_y))
 	{
 		i = (p1.y * e->sizeline) + (p1.x * e->bpp / 8);
-		e->data[i] = e->color.r;
+		e->data[i] = e->color.b;
 		e->data[i + 1] = e->color.g;
-		e->data[i + 2] = e->color.b;
+		e->data[i + 2] = e->color.r;
 	}
-	ft_color_depth(e, p1, p2);
+	ft_change_color(e, p1, p2);
 
 }
 
@@ -124,9 +113,7 @@ void		ft_draw_grid(t_env *e)
 		while (++x < e->file.nb_x)
 		{
 			if (x < e->file.nb_x - 1)
-			{
 				ft_draw_line(e, e->file.map[y][x], e->file.map[y][x + 1]);
-			}
 			if (y < e->file.nb_y - 1)
 				ft_draw_line(e, e->file.map[y][x], e->file.map[y + 1][x]);
 		}

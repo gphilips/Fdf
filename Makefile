@@ -6,13 +6,13 @@
 #    By: gphilips <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:06:34 by gphilips          #+#    #+#              #
-#    Updated: 2017/02/03 17:29:25 by gphilips         ###   ########.fr        #
+#    Updated: 2017/02/07 15:59:11 by gphilips         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = main.c init.c create_win.c read_file.c map.c draw.c event.c event_color.c
+SRC = main.c init.c create_win.c read_file.c map.c draw.c event.c
 CFLAGS = -Wall -Werror -Wextra
 MLX = -lmlx -framework OpenGL -framework AppKit
 LIBDIR = libft/

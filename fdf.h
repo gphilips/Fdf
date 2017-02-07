@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 19:24:07 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/07 15:58:42 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 # define RIGHT 124
 # define FRONT 3
 # define BACK 11
-# define RED 12
-# define GREEN 13
-# define BLUE 14
+# define RED 83
+# define GREEN 84
+# define BLUE 85
 
 typedef struct	s_color
 {
@@ -98,6 +98,5 @@ void	ft_change_depth(int key, t_env *e);
 void	ft_zoom(int key, t_env *e);
 void	ft_move(int key, t_env *e);
 void	ft_reinit(t_env *e);
-void	ft_change_color(int key, t_env *e);
 int		ft_expose_hook(t_env *e);
 #endif
