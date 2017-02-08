@@ -51,23 +51,26 @@ static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 
 static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 {
-	e->point.dx = abs(p2.x - p1.x);
-	e->point.dy = abs(p2.y - p1.y);
-	e->point.sx = (p1.x < p2.x) ? 1 : -1;
-	e->point.sy = (p1.y < p2.y) ? 1 : -1;
-	e->point.err1 = (e->point.dx > e->point.dy ? e->point.dx : -e->point.dy) / 2;
+	t_point	p;
+
+	p = e->point;
+	p.dx = abs(p2.x - p1.x);
+	p.dy = abs(p2.y - p1.y);
+	p.sx = (p1.x < p2.x) ? 1 : -1;
+	p.sy = (p1.y < p2.y) ? 1 : -1;
+	p.err1 = (p.dx > p.dy ? p.dx : -p.dy) / 2;
 	while (p1.x != p2.x || p1.y != p2.y)
 	{
-		e->point.err2 = e->point.err1;
-		if (e->point.err2 >= -e->point.dx)
+		p.err2 = p.err1;
+		if (p.err2 >= -p.dx)
 		{
-			e->point.err1 -= e->point.dy;
-			p1.x += e->point.sx;
+			p.err1 -= p.dy;
+			p1.x += p.sx;
 		}
-		if (e->point.err2 <= e->point.dy)
+		if (p.err2 <= p.dy)
 		{
-			e->point.err1 += e->point.dx;
-			p1.y += e->point.sy;
+			p.err1 += p.dx;
+			p1.y += p.sy;
 		}
 		ft_pixel_put(e, p1, p2);
 	}

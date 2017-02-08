@@ -43,6 +43,6 @@ int		main(int argc, char **argv)
 	ft_create_win(e);
 	if ((close(fd)) == -1)
 		return (ft_error(2) == -1 ? -1 : 0);
-	free(*(e->file.map));
+	ft_free_map(e->file.map, e);
 	return (0);
 }

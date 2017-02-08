@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
+
 static void	ft_instruction(t_env *e)
 {
 	char	*iso;
@@ -21,10 +21,10 @@ static void	ft_instruction(t_env *e)
 	char	*reinit;
 
 	iso = "P = increase the depth\n | L = lower the depth\n";
-	zoom = "F = zoom in\n | B = zoom out";
-	move = "UP | DOWN | LEFT | RIGHT = move the map\n";
-	proj = "TAB = change the projection of the map\n";
-	reinit = "ENTER = reinitialise the map\n";
+	zoom = "Mouse 1 or F = zoom in\n | Mouse 2 or B = zoom out";
+	move = "Arrow up/down/left/right = move the map\n";
+	proj = "Tab = change the projection of the map\n";
+	reinit = "Enter = reinitialise the map\n";
 	mlx_string_put(e->mlx, e->win, 10, 0, 0x00FFFFFF, "COMMANDS:");
 	mlx_string_put(e->mlx, e->win, 10, 20, 0x00FFFFFF, iso);
 	mlx_string_put(e->mlx, e->win, 10, 40, 0x00FFFFFF, zoom);
@@ -32,7 +32,7 @@ static void	ft_instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 80, 0x00FFFFFF, proj);
 	mlx_string_put(e->mlx, e->win, 10, 100, 0x00FFFFFF, reinit);
 }
-*/
+
 static int	ft_mouse_hook(int button, int x, int y, t_env *e)
 {
 	ft_putstr("Mouse ");
@@ -79,6 +79,7 @@ int			ft_expose_hook(t_env *e)
 	ft_create_int_tab(e->lst, e);
 	ft_draw_grid(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	ft_instruction(e);
 	mlx_destroy_image(e->mlx, e->img);
 	return (0);
 }
@@ -89,7 +90,6 @@ void		ft_create_win(t_env *e)
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
 	mlx_key_hook(e->win, ft_key_hook, e);
 	mlx_mouse_hook(e->win, ft_mouse_hook, e);
-	//ft_instruction(e);
 	mlx_expose_hook(e->win, ft_expose_hook, e);
 	mlx_loop(e->mlx);
 }

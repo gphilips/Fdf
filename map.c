@@ -28,25 +28,26 @@ static void	ft_iso(t_env *e, int x, int y)
 
 t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 {
-	char	**split;
 	int		x;
 	int		y;
+	t_list	**start;
 
+	start = &lst;
 	e->file.map = (t_map**)ft_memalloc(sizeof(t_map*) * e->file.nb_y);
 	y = -1;
 	while (++y < e->file.nb_y)
 	{
-		split = ft_strsplit((char*)lst->content, ' ');
+		e->file.split = ft_strsplit((char*)lst->content, ' ');
 		e->file.map[y] = (t_map*)ft_memalloc(sizeof(t_map) * e->file.nb_x);
 		x = -1;
 		while (++x < e->file.nb_x)
 		{
-			e->file.map[y][x].z = ft_atoi(split[x]);
+			e->file.map[y][x].z = ft_atoi(e->file.split[x]);
 			ft_iso(e, x, y);
-			free(split[x]);
 		}
 		lst = lst->next;
 	}
-	free(split);
+	ft_lstdel(start, ft_free_node);
+	ft_free_split(e->file.split, e);
 	return (e->file.map);
 }
