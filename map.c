@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:47:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 20:01:26 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/09 17:15:52 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 		{
 			e->file.map[y][x].z = ft_atoi(e->file.split[x]);
 			ft_iso(e, x, y);
+			free(e->file.split[x]);
 		}
 		lst = lst->next;
 	}
+	free(e->file.split);
 	ft_lstdel(start, ft_free_node);
-	ft_free_split(e->file.split, e);
 	return (e->file.map);
 }

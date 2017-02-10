@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:51 by gphilips          #+#    #+#             */
-/*   Updated: 2017/01/26 17:33:14 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:57:44 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ static int	ft_get_size(t_env *e)
 	while (tmp)
 	{
 		e->file.split = ft_strsplit(tmp->content, ' ');
-		i = 0;
-		while (e->file.split[i])
-			i++;
-		ft_free_split(e->file.split, e);
+		i = -1;
+		while (e->file.split[++i])
+			free(e->file.split[i]);
 		if (e->file.nb_x == 0 && flag == 0)
 		{
 			flag = 1;

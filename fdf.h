@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/07 15:58:42 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/09 17:10:17 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,5 @@ void	ft_move(int key, t_env *e);
 void	ft_reinit(t_env *e);
 
 void	ft_free_node(void *content, size_t size);
-void	ft_free_split(char **split, t_env *e);
 void	ft_free_map(t_map **map, t_env *e);
 #endif
