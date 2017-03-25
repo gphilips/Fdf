@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/07 19:41:21 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/09 17:16:58 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 		e->data[i + 2] = e->color.r;
 	}
 	ft_change_color(e, p1, p2);
-
 }
 
 static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
@@ -76,7 +75,7 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 	}
 }
 
-void		ft_draw_grid(t_env *e)
+void			ft_draw_grid(t_env *e)
 {
 	int		y;
 	int		x;

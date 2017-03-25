@@ -6,13 +6,13 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:06 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/03 15:07:26 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/02/09 17:13:56 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		ft_error(int n)
+static int	ft_error(int n)
 {
 	if (n == 1)
 		ft_putendl_fd("usage: ./fdf <filename> [ case_size z_size ]", 2);
@@ -25,7 +25,7 @@ static int		ft_error(int n)
 	return (-1);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_env	*e;
 	int		fd;
