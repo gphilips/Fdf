@@ -34,17 +34,17 @@ static void	ft_init_file(t_env *e)
 	e->file.nb_x = 0;
 	e->file.nb_y = 0;
 	e->file.map = NULL;
-	e->file.split = NULL;
 	e->file.space = 30;
-	e->file.depth = 0;
+	e->file.split = NULL;
+	e->file.depth = 2;
 }
 
 t_env		*ft_init_all(t_env *e)
 {
 	e->mlx = NULL;
 	e->win = NULL;
-	e->win_x = 1000;
-	e->win_y = 600;
+	e->win_x = 1300;
+	e->win_y = 700;
 	e->margin_l = 400;
 	e->margin_t = 100;
 	e->proj = 1;

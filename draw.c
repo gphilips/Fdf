@@ -14,13 +14,13 @@
 
 static void		ft_change_color(t_env *e, t_map p1, t_map p2)
 {
-	if (p1.z == 0 && p2.z == 0)
+	if (p1.z == 0 && p1.z == p2.z)
 	{
 		e->color.r = 255;
 		e->color.g = 255;
 		e->color.b = 255;
 	}
-	else if ((p1.z != 0 || p2.z != 0) && ((e->file.depth + p1.z) < 0))
+	else if (p1.z * e->file.depth < 0)
 	{
 		e->color.r = 0;
 		e->color.g = 55;
@@ -76,39 +76,11 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 	}
 }
 
-static void	ft_3d(t_env *e)
-{
-	int		y;
-	int		x;
-	t_file	f;
-
-	f = e->file;
-	y = -1;
-	while (++y < e->file.nb_y)
-	{
-		x = -1;
-		while (++x < e->file.nb_x)
-		{
-			if (f.map[y][x].z > 0)
-			{
-				f.map[y][x].x -= (f.map[y][x].z + f.depth) / f.nb_x;
-				f.map[y][x].y -= (f.map[y][x].z + f.depth) * f.nb_y;
-			}
-			else if (f.map[y][x].z < 0)
-			{
-				f.map[y][x].x += (f.map[y][x].z + f.depth) / f.nb_x;
-				f.map[y][x].y += (f.map[y][x].z + f.depth) * f.nb_y;
-			}
-		}
-	}
-}
-
 void		ft_draw_grid(t_env *e)
 {
 	int		y;
 	int		x;
 
-	ft_3d(e);
 	y = -1;
 	while (++y < e->file.nb_y)
 	{

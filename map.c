@@ -14,15 +14,18 @@
 
 static void	ft_iso(t_env *e, int x, int y)
 {
+	t_file	f;
+
+	f = e->file;
 	if (e->proj == 1)
 	{
-		e->file.map[y][x].x = e->margin_l + (x - y) * (e->file.space / 2);
-		e->file.map[y][x].y = e->margin_t + (x + y) * (e->file.space / 2);
+		f.map[y][x].x = e->margin_l + (x - y) * (f.space / 2);
+		f.map[y][x].y = e->margin_t + (x + y) * (f.space / 2) - (f.map[y][x].z * f.depth);
 	}
 	if (e->proj == 0)
 	{
-		e->file.map[y][x].x = e->margin_l + x * e->file.space;
-		e->file.map[y][x].y = e->margin_t + y * e->file.space;
+		f.map[y][x].x = e->margin_l + (x * f.space);
+		f.map[y][x].y = e->margin_t + (y * f.space) - (f.map[y][x].z * f.depth);
 	}
 }
 
@@ -47,7 +50,7 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 		}
 		lst = lst->next;
 	}
+	free(e->file.split);
 	ft_lstdel(start, ft_free_node);
-	ft_free_split(e->file.split, e);
 	return (e->file.map);
 }

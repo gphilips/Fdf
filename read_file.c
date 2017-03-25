@@ -32,10 +32,9 @@ static int	ft_get_size(t_env *e)
 	while (tmp)
 	{
 		e->file.split = ft_strsplit(tmp->content, ' ');
-		i = 0;
-		while (e->file.split[i])
-			i++;
-		ft_free_split(e->file.split, e);
+		i = -1;
+		while (e->file.split[++i])
+			free(e->file.split[i]);
 		if (e->file.nb_x == 0 && flag == 0)
 		{
 			flag = 1;
