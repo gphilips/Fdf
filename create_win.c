@@ -17,20 +17,23 @@ static void	ft_instruction(t_env *e)
 	char	*iso;
 	char	*zoom;
 	char	*move;
+	char	*color;
 	char	*proj;
 	char	*reinit;
 
-	iso = "P = increase the depth\n | L = lower the depth\n";
-	zoom = "Mouse 1 or F = zoom in\n | Mouse 2 or B = zoom out";
-	move = "Arrow up/down/left/right = move the map\n";
-	proj = "Tab = change the projection of the map\n";
-	reinit = "Enter = reinitialise the map\n";
+	iso = "P/L : increase/lower the depth\n";
+	zoom = "Left click or A : zoom in\nRight click or Z : zoom out";
+	move = "Arrow up/down/left/right : move the map\n";
+	color = "R/G/B : change the color\n";
+	proj = "Tab : change the projection of the map\n";
+	reinit = "Enter : reinitialise the map\n";
 	mlx_string_put(e->mlx, e->win, 10, 0, 0x00FFFFFF, "COMMANDS:");
 	mlx_string_put(e->mlx, e->win, 10, 20, 0x00FFFFFF, iso);
 	mlx_string_put(e->mlx, e->win, 10, 40, 0x00FFFFFF, zoom);
 	mlx_string_put(e->mlx, e->win, 10, 60, 0x00FFFFFF, move);
-	mlx_string_put(e->mlx, e->win, 10, 80, 0x00FFFFFF, proj);
-	mlx_string_put(e->mlx, e->win, 10, 100, 0x00FFFFFF, reinit);
+	mlx_string_put(e->mlx, e->win, 10, 80, 0x00FFFFFF, color);
+	mlx_string_put(e->mlx, e->win, 10, 100, 0x00FFFFFF, proj);
+	mlx_string_put(e->mlx, e->win, 10, 120, 0x00FFFFFF, reinit);
 }
 
 static int	ft_mouse_hook(int button, int x, int y, t_env *e)
@@ -68,6 +71,8 @@ static int	ft_key_hook(int keycode, t_env *e)
 		ft_move(keycode, e);
 	else if (keycode == ENT)
 		ft_reinit(e);
+	else if (keycode == R || keycode == G || keycode == B)
+		ft_change_color(keycode, e);
 	ft_expose_hook(e);
 	return (0);
 }
@@ -88,7 +93,7 @@ void		ft_create_win(t_env *e)
 {
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
-	mlx_key_hook(e->win, ft_key_hook, e);
+	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, ft_key_hook, e);
 	mlx_mouse_hook(e->win, ft_mouse_hook, e);
 	mlx_expose_hook(e->win, ft_expose_hook, e);
 	mlx_loop(e->mlx);

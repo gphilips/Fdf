@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static void		ft_change_color(t_env *e, t_map p1, t_map p2)
+static void		ft_color(t_env *e, t_map p1, t_map p2)
 {
 	if (p1.z == 0 && p1.z == p2.z)
 	{
@@ -22,15 +22,15 @@ static void		ft_change_color(t_env *e, t_map p1, t_map p2)
 	}
 	else if (p1.z * e->file.depth < 0)
 	{
-		e->color.r = 0;
-		e->color.g = 55;
-		e->color.b = 153;
+		e->color.r = 0 + e->color.tmp_r;
+		e->color.g = 55 + e->color.tmp_g;
+		e->color.b = 153 + e->color.tmp_b;
 	}
 	else
 	{
-		e->color.r = 51;
-		e->color.g = 153;
-		e->color.b = 255;
+		e->color.r = 51 + e->color.tmp_r;
+		e->color.g = 153 + e->color.tmp_g;
+		e->color.b = 255 + e->color.tmp_b;
 	}
 }
 
@@ -45,7 +45,7 @@ static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 		e->data[i + 1] = e->color.g;
 		e->data[i + 2] = e->color.r;
 	}
-	ft_change_color(e, p1, p2);
+	ft_color(e, p1, p2);
 }
 
 static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
@@ -92,4 +92,14 @@ void			ft_draw_grid(t_env *e)
 				ft_draw_line(e, e->file.map[y][x], e->file.map[y + 1][x]);
 		}
 	}
+}
+
+void	ft_change_color(int key, t_env *e)
+{
+	if (key == R)
+		e->color.tmp_r += 10;
+	if (key == G)
+		e->color.tmp_g += 10;
+	if (key == B)
+		e->color.tmp_b += 10;
 }

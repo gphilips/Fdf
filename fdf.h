@@ -28,14 +28,19 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
-# define FRONT 3
-# define BACK 11
-# define RED 83
-# define GREEN 84
-# define BLUE 85
+# define FRONT 13
+# define BACK 53
+# define R 15
+# define G 5
+# define B 11
+#define KEYPRESS 2
+#define KEYPRESSMASK (1L<<2)
 
 typedef struct	s_color
 {
+	int		tmp_r;
+	int		tmp_g;
+	int		tmp_b;
 	int		r;
 	int		g;
 	int		b;
@@ -100,6 +105,7 @@ void	ft_change_depth(int key, t_env *e);
 void	ft_zoom(int key, t_env *e);
 void	ft_move(int key, t_env *e);
 void	ft_reinit(t_env *e);
+void	ft_change_color(int key, t_env *e);
 
 void	ft_free_node(void *content, size_t size);
 void	ft_free_map(t_map **map, t_env *e);

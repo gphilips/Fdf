@@ -14,6 +14,9 @@
 
 static void	ft_init_color(t_env *e)
 {
+	e->color.tmp_r = 0;
+	e->color.tmp_g = 0;
+	e->color.tmp_b = 0;
 	e->color.r = 255;
 	e->color.g = 255;
 	e->color.b = 255;

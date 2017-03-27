@@ -15,7 +15,7 @@
 static int	ft_error(int n)
 {
 	if (n == 1)
-		ft_putendl_fd("usage: ./fdf <filename> [ case_size z_size ]", 2);
+		ft_putendl_fd("usage: ./fdf <map>", 2);
 	if (n == 2)
 		ft_putendl_fd("error: something is wrong with the file", 2);
 	if (n == 3)
