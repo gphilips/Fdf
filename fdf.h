@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/09 17:10:17 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:03:51 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,21 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
-# define FRONT 13
-# define BACK 53
+# define FRONT 69
+# define BACK 78
 # define R 15
 # define G 5
 # define B 11
-#define KEYPRESS 2
-#define KEYPRESSMASK (1L<<2)
+# define KEYPRESS 2
+# define KEYPRESSMASK (1L<<2)
+
+# define CMD "\nCOMMANDS :"
+# define ISO "P/L : increase/lower the depth"
+# define ZOOM "Left click or + : zoom in\nRight click or - : zoom out"
+# define MOVE "Arrow up/down/left/right : move the map"
+# define COLOR "R/G/B : change the color"
+# define PROJ "Tab : change the projection of the map"
+# define REINIT "Enter : reinitialise the map"
 
 typedef struct	s_color
 {

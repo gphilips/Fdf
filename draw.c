@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/09 17:16:58 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:47:54 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void			ft_draw_grid(t_env *e)
 	}
 }
 
-void	ft_change_color(int key, t_env *e)
+void			ft_change_color(int key, t_env *e)
 {
 	if (key == R)
 		e->color.tmp_r += 10;

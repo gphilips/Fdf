@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:06 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/09 17:13:56 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/28 19:02:58 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ static int	ft_error(int n)
 	return (-1);
 }
 
+static void	ft_info(void)
+{
+	ft_putendl(CMD);
+	ft_putendl(ISO);
+	ft_putendl(ZOOM);
+	ft_putendl(MOVE);
+	ft_putendl(COLOR);
+	ft_putendl(PROJ);
+	ft_putendl(REINIT);
+}
+
 int			main(int argc, char **argv)
 {
 	t_env	*e;
@@ -40,6 +51,7 @@ int			main(int argc, char **argv)
 		return (ft_error(3) == -1 ? -1 : 0);
 	if (!(ft_create_int_tab(e->lst, e)))
 		return (ft_error(4) == -1 ? -1 : 0);
+	ft_info();
 	ft_create_win(e);
 	if ((close(fd)) == -1)
 		return (ft_error(2) == -1 ? -1 : 0);

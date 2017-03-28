@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:47:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/09 17:15:52 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:50:01 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 static void	ft_iso(t_env *e, int x, int y)
 {
 	t_file	f;
+	float	change_z;
 
 	f = e->file;
+	change_z = f.map[y][x].z * f.depth;
 	if (e->proj == 1)
 	{
 		f.map[y][x].x = e->margin_l + (x - y) * (f.space / 2);
-		f.map[y][x].y = e->margin_t + (x + y) * (f.space / 2) - (f.map[y][x].z * f.depth);
+		f.map[y][x].y = e->margin_t + (x + y) * (f.space / 2) - change_z;
 	}
 	if (e->proj == 0)
 	{
 		f.map[y][x].x = e->margin_l + (x * f.space);
-		f.map[y][x].y = e->margin_t + (y * f.space) - (f.map[y][x].z * f.depth);
+		f.map[y][x].y = e->margin_t + (y * f.space) - change_z;
 	}
 }
 

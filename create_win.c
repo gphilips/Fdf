@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/07 19:24:03 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/28 18:59:30 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,13 @@
 
 static void	ft_instruction(t_env *e)
 {
-	char	*iso;
-	char	*zoom;
-	char	*move;
-	char	*color;
-	char	*proj;
-	char	*reinit;
-
-	iso = "P/L : increase/lower the depth\n";
-	zoom = "Left click or A : zoom in\nRight click or Z : zoom out";
-	move = "Arrow up/down/left/right : move the map\n";
-	color = "R/G/B : change the color\n";
-	proj = "Tab : change the projection of the map\n";
-	reinit = "Enter : reinitialise the map\n";
-	mlx_string_put(e->mlx, e->win, 10, 0, 0x00FFFFFF, "COMMANDS:");
-	mlx_string_put(e->mlx, e->win, 10, 20, 0x00FFFFFF, iso);
-	mlx_string_put(e->mlx, e->win, 10, 40, 0x00FFFFFF, zoom);
-	mlx_string_put(e->mlx, e->win, 10, 60, 0x00FFFFFF, move);
-	mlx_string_put(e->mlx, e->win, 10, 80, 0x00FFFFFF, color);
-	mlx_string_put(e->mlx, e->win, 10, 100, 0x00FFFFFF, proj);
-	mlx_string_put(e->mlx, e->win, 10, 120, 0x00FFFFFF, reinit);
+	mlx_string_put(e->mlx, e->win, 10, 0, 0x00FFFFFF, CMD);
+	mlx_string_put(e->mlx, e->win, 10, 20, 0x00FFFFFF, ISO);
+	mlx_string_put(e->mlx, e->win, 10, 40, 0x00FFFFFF, ZOOM);
+	mlx_string_put(e->mlx, e->win, 10, 60, 0x00FFFFFF, MOVE);
+	mlx_string_put(e->mlx, e->win, 10, 80, 0x00FFFFFF, COLOR);
+	mlx_string_put(e->mlx, e->win, 10, 100, 0x00FFFFFF, PROJ);
+	mlx_string_put(e->mlx, e->win, 10, 120, 0x00FFFFFF, REINIT);
 }
 
 static int	ft_mouse_hook(int button, int x, int y, t_env *e)
