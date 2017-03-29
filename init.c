@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:32 by gphilips          #+#    #+#             */
-/*   Updated: 2017/02/07 16:21:17 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/29 19:12:10 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_env		*ft_init_all(t_env *e)
 	e->margin_l = 400;
 	e->margin_t = 100;
 	e->proj = 1;
+	e->img = NULL;
+	e->data = NULL;
 	ft_init_point(e);
 	ft_init_file(e);
 	ft_init_color(e);
