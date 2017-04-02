@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 20:40:00 by gphilips          #+#    #+#             */
-/*   Updated: 2016/11/18 20:48:34 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/02 13:11:45 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_lst_push_back(t_list *list, t_list *new)
 {
 	t_list	*tmp;
-	
+
 	tmp = list;
 	if (tmp && new)
 	{

@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/28 18:59:30 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/02 12:53:29 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ static int	ft_mouse_hook(int button, int x, int y, t_env *e)
 
 static int	ft_key_hook(int keycode, t_env *e)
 {
-	ft_putstr("key: ");
-	ft_putnbr(keycode);
-	ft_putchar('\n');
 	if (keycode == ESC)
 		exit(0);
 	else if (keycode == TAB)

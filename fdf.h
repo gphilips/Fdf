@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/28 19:03:51 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/02 16:24:24 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define KEYPRESS 2
 # define KEYPRESSMASK (1L<<2)
 
-# define CMD "\nCOMMANDS :"
+# define CMD "COMMANDS :"
 # define ISO "P/L : increase/lower the depth"
 # define ZOOM "Left click or + : zoom in\nRight click or - : zoom out"
 # define MOVE "Arrow up/down/left/right : move the map"
@@ -101,20 +101,20 @@ typedef struct	s_env
 	t_color		color;
 }				t_env;
 
-t_env	*ft_init_all(t_env *e);
-int		ft_read_file(int fd, t_env *e);
-t_map	**ft_create_int_tab(t_list *lst, t_env *e);
-void	ft_draw_grid(t_env *e);
-void	ft_create_win(t_env *e);
-int		ft_expose_hook(t_env *e);
+t_env			*ft_init_all(t_env *e);
+int				ft_read_file(int fd, t_env *e);
+t_map			**ft_create_int_tab(t_list *lst, t_env *e);
+void			ft_draw_grid(t_env *e);
+void			ft_create_win(t_env *e);
+int				ft_expose_hook(t_env *e);
 
-void	ft_change_proj(t_env *e);
-void	ft_change_depth(int key, t_env *e);
-void	ft_zoom(int key, t_env *e);
-void	ft_move(int key, t_env *e);
-void	ft_reinit(t_env *e);
-void	ft_change_color(int key, t_env *e);
+void			ft_change_proj(t_env *e);
+void			ft_change_depth(int key, t_env *e);
+void			ft_zoom(int key, t_env *e);
+void			ft_move(int key, t_env *e);
+void			ft_reinit(t_env *e);
+void			ft_change_color(int key, t_env *e);
 
-void	ft_free_node(void *content, size_t size);
-void	ft_free_map(t_map **map, t_env *e);
+void			ft_free_node(void *content, size_t size);
+void			ft_free_map(t_map **map, t_env *e);
 #endif
