@@ -53,7 +53,7 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 		}
 		lst = lst->next;
 	}
-	free(e->file.split);
+	ft_tabdel(e->file.split);
 	ft_lstdel(start, ft_free_node);
 	return (e->file.map);
 }

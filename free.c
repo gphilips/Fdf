@@ -19,13 +19,22 @@ void	ft_free_node(void *content, size_t size)
 	size = 0;
 }
 
-void	ft_free_map(t_map **map, t_env *e)
+void	ft_free_map(t_env *e)
 {
 	int		i;
 
 	i = -1;
 	while (++i < e->file.nb_y)
-		free(map[i]);
-	free(map);
-	map = NULL;
+		free(e->file.map[i]);
+	free(e->file.map);
+	e->file.map = NULL;
+}
+
+void	ft_tabdel(char **tab)
+{
+	if (tab)
+	{
+		free(tab);
+		tab = NULL;
+	}
 }

@@ -26,15 +26,16 @@ static int	ft_get_size(t_env *e)
 	int		flag;
 	int		tmp_x;
 	t_list	*tmp;
+	char	**split;
 
 	flag = 0;
 	tmp = e->lst;
 	while (tmp)
 	{
-		e->file.split = ft_strsplit(tmp->content, ' ');
+		split = ft_strsplit(tmp->content, ' ');
 		i = -1;
-		while (e->file.split[++i])
-			free(e->file.split[i]);
+		while (split[++i])
+			free(split[i]);
 		if (e->file.nb_x == 0 && flag == 0)
 		{
 			flag = 1;
@@ -45,6 +46,7 @@ static int	ft_get_size(t_env *e)
 			return (-1);
 		tmp = tmp->next;
 	}
+	ft_tabdel(split);
 	return (0);
 }
 

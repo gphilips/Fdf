@@ -51,10 +51,10 @@ int			main(int argc, char **argv)
 		return (ft_error(3) == -1 ? -1 : 0);
 	if (!(ft_create_int_tab(e->lst, e)))
 		return (ft_error(4) == -1 ? -1 : 0);
+	ft_free_map(e);
 	ft_info();
 	ft_create_win(e);
 	if ((close(fd)) == -1)
 		return (ft_error(2) == -1 ? -1 : 0);
-	ft_free_map(e->file.map, e);
 	return (0);
 }

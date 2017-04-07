@@ -32,7 +32,7 @@ void	ft_zoom(int key, t_env *e)
 {
 	if (key == FRONT)
 		e->file.space += 5;
-	else if (key == BACK)
+	else if (key == BACK && e->file.space > 5)
 		e->file.space -= 5;
 }
 

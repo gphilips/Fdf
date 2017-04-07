@@ -34,7 +34,7 @@ static int	ft_mouse_hook(int button, int x, int y, t_env *e)
 	ft_putchar('\n');
 	if (button == 1)
 		e->file.space += 5;
-	else if (button == 2)
+	else if (button == 2 && e->file.space > 5)
 		e->file.space -= 5;
 	ft_expose_hook(e);
 	return (0);

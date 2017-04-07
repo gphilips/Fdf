@@ -115,6 +115,7 @@ void			ft_move(int key, t_env *e);
 void			ft_reinit(t_env *e);
 void			ft_change_color(int key, t_env *e);
 
+void			ft_tabdel(char **tab);
 void			ft_free_node(void *content, size_t size);
-void			ft_free_map(t_map **map, t_env *e);
+void			ft_free_map(t_env *e);
 #endif
