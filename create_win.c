@@ -43,7 +43,10 @@ static int	ft_mouse_hook(int button, int x, int y, t_env *e)
 static int	ft_key_hook(int keycode, t_env *e)
 {
 	if (keycode == ESC)
+	{
+		mlx_destroy_window(e->mlx, e->win);
 		exit(0);
+	}
 	else if (keycode == TAB)
 		ft_change_proj(e);
 	else if (keycode == PLUS || keycode == MIN)
