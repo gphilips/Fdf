@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:51 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/10 16:28:39 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/10 16:45:12 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ static int	ft_check_num(char *content)
 	len = ft_strlen(content);
 	while (++i < len)
 	{
-		if ((content[i] >= 'a' && content[i] <= 'z')
-			&& content[i] != 'x' && content[i] != 'f')
+		if (((content[i] >= 'a' && content[i] <= 'z')
+			|| (content[i] >= 'A' && content[i] <= 'Z'))
+			&& (content[i] != 'x' && content[i] != 'f'))
 			return (-1);
 	}
 	return (0);
