@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:51 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 16:18:54 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/10 16:28:39 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ static int	ft_get_size(t_env *e)
 	int		flag;
 	int		tmp_x;
 	t_list	*tmp;
-	char	**split;
 
 	flag = 0;
 	tmp = e->lst;
 	while (tmp)
 	{
-		split = ft_strsplit(tmp->content, ' ');
+		e->file.split = ft_strsplit(tmp->content, ' ');
 		i = -1;
-		while (split[++i])
-			free(split[i]);
+		while (e->file.split[++i])
+			free(e->file.split[i]);
 		if (e->file.nb_x == 0 && flag == 0)
 		{
 			flag = 1;
@@ -46,7 +45,23 @@ static int	ft_get_size(t_env *e)
 			return (-1);
 		tmp = tmp->next;
 	}
-	ft_tabdel(split);
+	ft_tabdel(e->file.split);
+	return (0);
+}
+
+static int	ft_check_num(char *content)
+{
+	int		i;
+	int		len;
+
+	i = -1;
+	len = ft_strlen(content);
+	while (++i < len)
+	{
+		if ((content[i] >= 'a' && content[i] <= 'z')
+			&& content[i] != 'x' && content[i] != 'f')
+			return (-1);
+	}
 	return (0);
 }
 
@@ -61,10 +76,14 @@ int			ft_read_file(int fd, t_env *e)
 	if (get_next_line(fd, &line) < 1)
 		return (-1);
 	e->lst = ft_lstnew(line, ft_strlen(line) + 1);
+	if ((ft_check_num(e->lst->content)) == -1)
+		return (-1);
 	free(line);
 	e->file.nb_y++;
 	while (get_next_line(fd, &line))
 	{
+		if ((ft_check_num(line)) == -1)
+			return (-1);
 		ft_lst_push_back(&e->lst, line);
 		e->file.nb_y++;
 		free(line);

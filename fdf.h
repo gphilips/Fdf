@@ -6,11 +6,11 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 16:24:24 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/10 15:21:44 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FDF_H
+#ifndef FDF_H
 # define FDF_H
 
 # include "libft/libft.h"
@@ -46,12 +46,12 @@
 
 typedef struct	s_color
 {
-	int		tmp_r;
-	int		tmp_g;
-	int		tmp_b;
-	int		r;
-	int		g;
-	int		b;
+	int			tmp_r;
+	int			tmp_g;
+	int			tmp_b;
+	int			r;
+	int			g;
+	int			b;
 }				t_color;
 
 typedef struct	s_map
@@ -118,4 +118,5 @@ void			ft_change_color(int key, t_env *e);
 void			ft_tabdel(char **tab);
 void			ft_free_node(void *content, size_t size);
 void			ft_free_map(t_env *e);
+
 #endif
