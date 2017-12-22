@@ -6,12 +6,13 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 12:53:29 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 20:29:33 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// Ca permet d'afficher les instructions dans la fenetre, au dessus de la map
 static void	ft_instruction(t_env *e)
 {
 	mlx_string_put(e->mlx, e->win, 10, 0, 0x00FFFFFF, CMD);
@@ -23,6 +24,8 @@ static void	ft_instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 120, 0x00FFFFFF, REINIT);
 }
 
+//Quand tu clic avec la souris, les espace entre les intersections s'elargi de 5
+//Un clic droit fera le contraire
 static int	ft_mouse_hook(int button, int x, int y, t_env *e)
 {
 	ft_putstr("Mouse ");
@@ -40,11 +43,15 @@ static int	ft_mouse_hook(int button, int x, int y, t_env *e)
 	return (0);
 }
 
+// Les keycodes representent des touches claviers qui emets des events.
+// TAB permet de changer la variable e->proj vu tout a l'heure
+// + et -la profondeur etc
 static int	ft_key_hook(int keycode, t_env *e)
 {
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(e->mlx, e->win);
+		free(e);
 		exit(0);
 	}
 	else if (keycode == TAB)
@@ -64,6 +71,9 @@ static int	ft_key_hook(int keycode, t_env *e)
 	return (0);
 }
 
+//Je creer une image, je recreer un tableau d'int et je dessine la map
+//Puis j'affiche l'image dans la fenetre
+//Et j'affiche les instructions au dessus de la map
 int			ft_expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
@@ -76,12 +86,19 @@ int			ft_expose_hook(t_env *e)
 	return (0);
 }
 
-void		ft_create_win(t_env *e)
+//J'initialise la MLX, je cree une fenetre, je set l'event de la souris et du clavier
+//Et je gere l'expose pour rafraichir l'image
+int		ft_create_win(t_env *e)
 {
-	e->mlx = mlx_init();
+	if (!(e->mlx = mlx_init()))
+	{
+		ft_putendl_fd("Error minilibx init", 2);
+		return (-1);
+	}
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "fdf");
 	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, ft_key_hook, e);
 	mlx_mouse_hook(e->win, ft_mouse_hook, e);
 	mlx_expose_hook(e->win, ft_expose_hook, e);
 	mlx_loop(e->mlx);
+	return (0);
 }

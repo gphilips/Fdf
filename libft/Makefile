@@ -26,7 +26,7 @@ FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 		ft_strsplit.c ft_lst_push_back.c ft_isupper.c ft_islower.c ft_max.c \
 		ft_swap.c ft_strdup_to_c.c ft_strlen_to_c.c ft_count_word.c \
-		get_next_line.c
+		ft_iswhitespace.c ft_min_max.c ft_atof.c get_next_line.c
 
 OBJ = $(FILES:.c=.o)
 
@@ -40,8 +40,6 @@ $(NAME) :
 	@ranlib $(NAME)
 	@echo "libft created"
 
-.PHONY: clean fclean re
-
 clean :
 	@rm -f $(OBJ)
 	@echo "Erasing .o files from libft"
@@ -51,3 +49,5 @@ fclean : clean
 	@echo "Erasing $(NAME)"
 
 re : fclean all
+
+.PHONY: clean fclean re

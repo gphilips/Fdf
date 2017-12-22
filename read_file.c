@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:51 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/10 16:45:12 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 19:53:08 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static void	ft_lst_push_back(t_list **list, char *line)
 		*list = ft_lstnew(line, ft_strlen(line) + 1);
 }
 
+//Dans chaque maillon de ma liste, j'isole chaque nombre d'une ligne
+//Et je compte le nombre de colonne
+//Je check en comparant le nb de colonne de la 1ere ligne avec les autres lignes
+//Si ya une ligne de taille differentes, ca retournera une erreur
 static int	ft_get_size(t_env *e)
 {
 	int		i;
@@ -34,7 +38,8 @@ static int	ft_get_size(t_env *e)
 		e->file.split = ft_strsplit(tmp->content, ' ');
 		i = -1;
 		while (e->file.split[++i])
-			free(e->file.split[i]);
+			ft_strdel(&e->file.split[i]);
+		ft_tabdel(e->file.split);
 		if (e->file.nb_x == 0 && flag == 0)
 		{
 			flag = 1;
@@ -45,7 +50,6 @@ static int	ft_get_size(t_env *e)
 			return (-1);
 		tmp = tmp->next;
 	}
-	ft_tabdel(e->file.split);
 	return (0);
 }
 
@@ -66,6 +70,10 @@ static int	ft_check_num(char *content)
 	return (0);
 }
 
+// je cree une nouvelle liste
+// et je check s'il s'agit bien de nombre.
+// (faire attention car jai pas gerer le cas des couleurs du style '0xFF0000')
+//ensuite je place la ligne dans la liste et je compte le nombre de ligne
 int			ft_read_file(int fd, t_env *e)
 {
 	char	*line;
@@ -80,6 +88,7 @@ int			ft_read_file(int fd, t_env *e)
 	if ((ft_check_num(e->lst->content)) == -1)
 		return (-1);
 	free(line);
+	line = NULL;
 	e->file.nb_y++;
 	while (get_next_line(fd, &line))
 	{
@@ -88,6 +97,7 @@ int			ft_read_file(int fd, t_env *e)
 		ft_lst_push_back(&e->lst, line);
 		e->file.nb_y++;
 		free(line);
+		line = NULL;
 	}
 	return ((ft_get_size(e) == -1 ? -1 : 0));
 }

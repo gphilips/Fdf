@@ -6,12 +6,13 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:33 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 12:51:33 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 18:19:39 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// Permet d'appliquer une couleur specifique en fonction de la profondeur du pixel sur la map
 static void		ft_color(t_env *e, t_map p1, t_map p2)
 {
 	if (p1.z == 0 && p1.z == p2.z)
@@ -34,6 +35,7 @@ static void		ft_color(t_env *e, t_map p1, t_map p2)
 	}
 }
 
+// Permet d'afficher un pixel dans la fenetre
 static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 {
 	int		i;
@@ -48,6 +50,7 @@ static void		ft_pixel_put(t_env *e, t_map p1, t_map p2)
 	ft_color(e, p1, p2);
 }
 
+// Algo de bresenham: permet de tracer une ligne dans n'importe quel sens
 static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 {
 	t_point	p;
@@ -75,6 +78,8 @@ static void		ft_draw_line(t_env *e, t_map p1, t_map p2)
 	}
 }
 
+// Trace en trait d'intersection en intersection 
+// pour dessiner toutes la map
 void			ft_draw_grid(t_env *e)
 {
 	int		y;
@@ -94,6 +99,7 @@ void			ft_draw_grid(t_env *e)
 	}
 }
 
+// Permet de changer les couleur avec les keycodes R G B
 void			ft_change_color(int key, t_env *e)
 {
 	if (key == R)

@@ -91,6 +91,9 @@ int					ft_max(int *tab, unsigned int len);
 char				*ft_strdup_to_c(char *str, char c);
 size_t				ft_strlen_to_c(char *str, char c);
 int					ft_count_word(const char *s, char c);
+int					ft_iswhitespace(char c);
+double				ft_min_max(double x, double min, double max);
+double				ft_atof(const char *nb, int *i);
 
 typedef struct		s_gnl
 {

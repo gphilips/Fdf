@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:53:54 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/10 15:21:44 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 20:25:46 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_env			*ft_init_all(t_env *e);
 int				ft_read_file(int fd, t_env *e);
 t_map			**ft_create_int_tab(t_list *lst, t_env *e);
 void			ft_draw_grid(t_env *e);
-void			ft_create_win(t_env *e);
+int				ft_create_win(t_env *e);
 int				ft_expose_hook(t_env *e);
 
 void			ft_change_proj(t_env *e);

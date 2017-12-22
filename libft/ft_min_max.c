@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_min_max.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 17:12:39 by gphilips          #+#    #+#             */
-/*   Updated: 2017/12/22 20:00:09 by gphilips         ###   ########.fr       */
+/*   Created: 2016/11/18 21:05:52 by gphilips          #+#    #+#             */
+/*   Updated: 2016/11/19 15:32:56 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-void	ft_free_node(void *content, size_t size)
+double	ft_min_max(double x, double min, double max)
 {
-	ft_memdel(&content);
-	size = 0;
-}
-
-void	ft_free_map(t_env *e)
-{
-	int		i;
-
-	i = -1;
-	while (++i < e->file.nb_y)
-		free(e->file.map[i]);
-	free(e->file.map);
-	e->file.map = NULL;
-}
-
-void	ft_tabdel(char **tab)
-{
-	if (tab)
-	{
-		free(tab);
-		tab = NULL;
-	}
+	if (x < min)
+		x = min;
+	else if (x > max)
+		x = max;
+	return (x);
 }

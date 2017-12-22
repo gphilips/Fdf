@@ -6,12 +6,17 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:47:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/28 18:50:01 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 19:58:30 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// Je creer une projection isometriaue, c'est une formule que jai trouve sur
+// internet et ai implemente. En gros, c'est ce qui donne l'impression que la
+// camera est legerement decale face a la map
+// si la variable e->proj vaut 1 alors l'effet isometriaue est applique
+// sinon cest la projection standards en 2D
 static void	ft_iso(t_env *e, int x, int y)
 {
 	t_file	f;
@@ -31,6 +36,7 @@ static void	ft_iso(t_env *e, int x, int y)
 	}
 }
 
+//Je stocke chaque nombre dans un tableau d'int
 t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 {
 	int		x;
@@ -38,22 +44,25 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 	t_list	**start;
 
 	start = &lst;
-	e->file.map = (t_map**)ft_memalloc(sizeof(t_map*) * e->file.nb_y);
+	if (!(e->file.map = (t_map**)ft_memalloc(sizeof(t_map*) * e->file.nb_y)))
+		return (NULL);
 	y = -1;
 	while (++y < e->file.nb_y)
 	{
 		e->file.split = ft_strsplit((char*)lst->content, ' ');
-		e->file.map[y] = (t_map*)ft_memalloc(sizeof(t_map) * e->file.nb_x);
+		if (!(e->file.map[y] = (t_map*)ft_memalloc(sizeof(t_map)
+			* e->file.nb_x)))
+			return (NULL);
 		x = -1;
 		while (++x < e->file.nb_x)
 		{
 			e->file.map[y][x].z = ft_atoi(e->file.split[x]);
 			ft_iso(e, x, y);
-			free(e->file.split[x]);
+			ft_strdel(&e->file.split[x]);
 		}
+		ft_tabdel(e->file.split);
 		lst = lst->next;
 	}
-	ft_tabdel(e->file.split);
 	ft_lstdel(start, ft_free_node);
 	return (e->file.map);
 }

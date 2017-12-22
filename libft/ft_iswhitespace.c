@@ -1,39 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 17:12:39 by gphilips          #+#    #+#             */
-/*   Updated: 2017/12/22 20:00:09 by gphilips         ###   ########.fr       */
+/*   Created: 2017/12/22 17:37:25 by gphilips          #+#    #+#             */
+/*   Updated: 2017/12/22 17:37:28 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-void	ft_free_node(void *content, size_t size)
+int		ft_iswhitespace(char c)
 {
-	ft_memdel(&content);
-	size = 0;
-}
-
-void	ft_free_map(t_env *e)
-{
-	int		i;
-
-	i = -1;
-	while (++i < e->file.nb_y)
-		free(e->file.map[i]);
-	free(e->file.map);
-	e->file.map = NULL;
-}
-
-void	ft_tabdel(char **tab)
-{
-	if (tab)
-	{
-		free(tab);
-		tab = NULL;
-	}
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+			|| c == '\r');
 }

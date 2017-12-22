@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:00:06 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 16:19:30 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 20:17:56 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	ft_error(int n)
 	return (-1);
 }
 
+//Affiche les instructions sur le terminal
 static void	ft_info(void)
 {
 	ft_putendl(CMD);
@@ -41,7 +42,8 @@ int			main(int argc, char **argv)
 	t_env	*e;
 	int		fd;
 
-	e = (t_env*)ft_memalloc(sizeof(t_env));
+	if (!(e = (t_env*)ft_memalloc(sizeof(t_env))))
+		return (0);
 	if (argc != 2)
 		return (ft_error(1) == -1 ? -1 : 0);
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
