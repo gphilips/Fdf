@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:46:19 by gphilips          #+#    #+#             */
-/*   Updated: 2017/12/22 20:29:33 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 21:02:41 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	ft_key_hook(int keycode, t_env *e)
 	{
 		mlx_destroy_window(e->mlx, e->win);
 		free(e);
+		while (1) {}
 		exit(0);
 	}
 	else if (keycode == TAB)
@@ -76,13 +77,20 @@ static int	ft_key_hook(int keycode, t_env *e)
 //Et j'affiche les instructions au dessus de la map
 int			ft_expose_hook(t_env *e)
 {
+	t_map **tmp;
+	int		i;
+
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
 	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
-	ft_create_int_tab(e->lst, e);
+	tmp = ft_create_int_tab(e->lst, e);
+	i = -1;
 	ft_draw_grid(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	ft_instruction(e);
 	mlx_destroy_image(e->mlx, e->img);
+	while (tmp[++i] != NULL)
+		free(tmp[i]);
+	free(tmp);
 	return (0);
 }
 

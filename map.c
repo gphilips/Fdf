@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 15:47:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/12/22 19:58:30 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/12/22 20:58:48 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 	t_list	**start;
 
 	start = &lst;
-	if (!(e->file.map = (t_map**)ft_memalloc(sizeof(t_map*) * e->file.nb_y)))
+	if (!(e->file.map = (t_map**)ft_memalloc(sizeof(t_map*) * e->file.nb_y + 1)))
 		return (NULL);
 	y = -1;
 	while (++y < e->file.nb_y)
@@ -64,5 +64,6 @@ t_map		**ft_create_int_tab(t_list *lst, t_env *e)
 		lst = lst->next;
 	}
 	ft_lstdel(start, ft_free_node);
+	e->file.map[e->file.nb_y] = NULL;
 	return (e->file.map);
 }
